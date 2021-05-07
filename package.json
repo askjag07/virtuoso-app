@@ -1,0 +1,25 @@
+{
+  "name": "virtuoso-app",
+  "private": true,
+  "description": "A simplified bare-bones starter for Gatsby",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "npm run reset && npm run format && gatsby build && cp -R public govirtuoso.org && gatsby serve",
+    "test": "npm run format && gatsby develop",
+    "reset": "gatsby clean && rm -rf govirtuoso.org",
+    "reinstall": "rm -rf node_modules && npm i",
+    "format": "prettier --write \"**/*.{js,jsx,scss,json}\""
+  },
+  "dependencies": {
+    "gatsby": "^3.4.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "prettier": "2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AskJag07/virtuoso-app"
+  }
+}
