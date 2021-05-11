@@ -38,7 +38,7 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <>
       <div
         className={
           'spinner-border text-primary center ' +
@@ -50,7 +50,8 @@ export default function Login() {
       </div>
       <form
         className={
-          'authForm card container p-5 ' + (loading ? 'invisible' : 'visible')
+          'login card container-fluid px-5 py-4 ' +
+          (loading ? 'invisible' : 'visible')
         }
         onSubmit={handleSubmit}
       >
@@ -101,6 +102,6 @@ export default function Login() {
           </small>
         </p>
       </form>
-    </div>
+    </>
   )
 }

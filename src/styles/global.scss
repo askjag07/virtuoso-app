@@ -49,28 +49,33 @@ a {
   left: calc(50% - 1rem);
 }
 
-@media (max-width: 400px) {
-  .authForm {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.register,
+.login {
+  max-width: 400px;
+  align-items: stretch;
+  justify-content: center;
 }
-@media (max-height: 780px) {
-  .authForm {
-    max-width: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@media (max-width: 400px) {
+  .register,
+  .login {
+    min-height: 100vh;
   }
 }
 @media (min-width: 400px) and (min-height: 780px) {
-  .authForm {
+  .register {
     position: absolute;
-    max-width: 400px;
-    top: calc(50%);
-    left: calc(50%);
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+@media (min-width: 400px) and (min-height: 410px) {
+  .login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);

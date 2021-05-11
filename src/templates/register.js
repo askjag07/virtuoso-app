@@ -19,7 +19,6 @@ export default function Register() {
     event.preventDefault()
     setLoading(true)
 
-    delete formData.confirmpassword
     authorize(formData, 0).then(err => {
       if (err) {
         setError(err)
@@ -67,16 +66,6 @@ export default function Register() {
           }
         }
         break
-      case 'confirmpassword':
-        errmsg = 'Passwords do not match.'
-        if (error === errmsg || error === null) {
-          if (value !== formData.password) {
-            setError(errmsg)
-          } else {
-            setError(null)
-          }
-        }
-        break
       case 'session':
         value = parseInt(value)
         break
@@ -94,7 +83,7 @@ export default function Register() {
   }
 
   return (
-    <div>
+    <>
       <div
         className={
           'spinner-border text-primary center ' +
@@ -106,7 +95,8 @@ export default function Register() {
       </div>
       <form
         className={
-          'authForm card container p-5 ' + (loading ? 'invisible' : 'visible')
+          'register card container-fluid px-5 py-4 ' +
+          (loading ? 'invisible' : 'visible')
         }
         onSubmit={handleSubmit}
       >
@@ -154,24 +144,6 @@ export default function Register() {
           />
           <label htmlFor='registerPasswordInput' className='text-black-50'>
             Password
-          </label>
-        </div>
-        <div className='form-floating mb-4'>
-          <input
-            type='password'
-            name='confirmpassword'
-            className='form-control'
-            id='registerConfirmPasswordInput'
-            placeholder='Re-enter password'
-            autoComplete='new-password'
-            onChange={handleChange}
-            required
-          />
-          <label
-            htmlFor='registerConfirmPasswordInput'
-            className='text-black-50'
-          >
-            Re-enter password
           </label>
         </div>
         <div className='mb-4'>
@@ -241,6 +213,6 @@ export default function Register() {
           </small>
         </p>
       </form>
-    </div>
+    </>
   )
 }
