@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react'
 import { Link } from 'gatsby'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import { authorize } from '../services/auth'
 
@@ -34,16 +35,15 @@ export default function Register() {
       case 'email':
         errmsg = 'Invalid email address.'
         if (error === errmsg || error === null) {
+          value = value.toLowerCase()
           if (
-            /* eslint-disable no-useless-escape */
-            !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(
+            !/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
               value
             )
           ) {
             setError(errmsg)
           } else {
             setError(null)
-            value = value.toLowerCase()
           }
         }
         break
@@ -86,7 +86,7 @@ export default function Register() {
     <>
       <div
         className={
-          'spinner-border text-primary center ' +
+          'spinner-border text-primary center position-absolute ' +
           (loading ? 'visible' : 'invisible')
         }
         role='status'
@@ -95,11 +95,17 @@ export default function Register() {
       </div>
       <form
         className={
-          'register card container-fluid px-5 py-4 ' +
+          'register card container-fluid justify-content-center align-items-stretch px-5 py-4 ' +
           (loading ? 'invisible' : 'visible')
         }
         onSubmit={handleSubmit}
       >
+        <StaticImage
+          className='icon'
+          src='../images/icon.png'
+          placeholder='tracedSVG'
+          alt='Virtuoso'
+        />
         <h1 className='text-center display-6 mb-4'>Register</h1>
         <div className='form-floating mb-3'>
           <input

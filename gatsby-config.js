@@ -8,5 +8,19 @@ module.exports = {
         printRejected: true,
       },
     },
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Virtuoso',
+        short_name: 'Virtuoso',
+        start_url: '/',
+        background_color: '#fafafa',
+        theme_color: '#0d6efd',
+        display: 'standalone',
+        icon: './src/images/icon.png',
+      },
+    },
   ],
 }

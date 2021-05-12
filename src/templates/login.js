@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react'
 import { Link } from 'gatsby'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import { authorize } from '../services/auth'
 
@@ -41,7 +42,7 @@ export default function Login() {
     <>
       <div
         className={
-          'spinner-border text-primary center ' +
+          'spinner-border text-primary center position-absolute ' +
           (loading ? 'visible' : 'invisible')
         }
         role='status'
@@ -50,11 +51,17 @@ export default function Login() {
       </div>
       <form
         className={
-          'login card container-fluid px-5 py-4 ' +
+          'login card container-fluid justify-content-center align-items-stretch px-5 py-4 ' +
           (loading ? 'invisible' : 'visible')
         }
         onSubmit={handleSubmit}
       >
+        <StaticImage
+          className='icon d-block'
+          src='../images/icon.png'
+          placeholder='tracedSVG'
+          alt='Virtuoso'
+        />
         <h1 className='text-center display-6 mb-4'>Log In</h1>
         <div className='form-floating mb-3'>
           <input

@@ -43,8 +43,12 @@ a {
   text-decoration: none;
 }
 
+.icon {
+  height: 52px;
+  width: 52px;
+}
+
 .center {
-  position: absolute;
   top: calc(50% - 1rem);
   left: calc(50% - 1rem);
 }
