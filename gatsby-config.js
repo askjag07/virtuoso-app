@@ -16,7 +16,7 @@ module.exports = {
         name: 'Virtuoso',
         short_name: 'Virtuoso',
         start_url: '/',
-        background_color: '#fafafa',
+        background_color: '#ffffff',
         theme_color: '#0d6efd',
         display: 'standalone',
         icon: './src/images/icon.png',

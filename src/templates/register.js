@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -12,15 +12,15 @@ const formReducer = function (state, event) {
 }
 
 export default function Register() {
-  const [formData, setFormData] = useReducer(formReducer, {})
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  var [formData, setFormData] = React.useReducer(formReducer, {})
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(null)
 
   const handleSubmit = function (event) {
     event.preventDefault()
     setLoading(true)
-
-    authorize(formData, 0).then(err => {
+    formData.session = new Date().getTime() < new Date(2021, 5, 7) ? 0 : 1
+    authorize(formData, 0).then(function (err) {
       if (err) {
         setError(err)
         setLoading(false)
@@ -66,9 +66,6 @@ export default function Register() {
           }
         }
         break
-      case 'session':
-        value = parseInt(value)
-        break
       case 'standard':
         value = parseInt(value)
         break
@@ -84,138 +81,110 @@ export default function Register() {
 
   return (
     <>
-      <div
-        className={
-          'spinner-border text-primary center position-absolute ' +
-          (loading ? 'visible' : 'invisible')
-        }
-        role='status'
-      >
-        <span className='visually-hidden'>Authenticating...</span>
-      </div>
+      {loading && (
+        <div
+          className="spinner-border text-primary center position-absolute"
+          role="status"
+        >
+          <span className="visually-hidden">Authenticating...</span>
+        </div>
+      )}
       <form
-        className={
-          'register card container-fluid justify-content-center align-items-stretch px-5 py-4 ' +
-          (loading ? 'invisible' : 'visible')
-        }
+        id="register"
+        className={`card container-fluid border-0 shadow justify-content-center align-items-stretch px-5 py-4 ${
+          loading ? 'd-none' : ''
+        }`}
         onSubmit={handleSubmit}
       >
         <StaticImage
-          className='icon'
-          src='../images/icon.png'
-          placeholder='tracedSVG'
-          alt='Virtuoso'
+          className="icon mx-auto mt-1"
+          src="../images/icon.png"
+          placeholder="tracedSVG"
+          alt="Virtuoso"
         />
-        <h1 className='text-center display-6 mb-4'>Register</h1>
-        <div className='form-floating mb-3'>
+        <h1 className="text-center display-6 my-4">Register</h1>
+        <div className="form-floating mb-3">
           <input
-            type='text'
-            name='full_name'
-            className='form-control'
-            id='registerNameInput'
-            placeholder='Full name'
-            autoComplete='name'
+            type="text"
+            name="full_name"
+            className="form-control"
+            id="registerNameInput"
+            placeholder="Full name"
+            autoComplete="name"
             onChange={handleChange}
             required
           />
-          <label htmlFor='registerNameInput' className='text-black-50'>
+          <label htmlFor="registerNameInput" className="text-black-50">
             Full name
           </label>
         </div>
-        <div className='form-floating mb-3'>
+        <div className="form-floating mb-3">
           <input
-            type='text'
-            name='email'
-            className='form-control'
-            id='registerEmailInput'
-            placeholder='Email address'
-            autoComplete='email'
+            type="text"
+            name="email"
+            className="form-control"
+            id="registerEmailInput"
+            placeholder="Email address"
+            autoComplete="email"
             onChange={handleChange}
             required
           />
-          <label htmlFor='registerEmailInput' className='text-black-50'>
+          <label htmlFor="registerEmailInput" className="text-black-50">
             Email address
           </label>
         </div>
-        <div className='form-floating mb-3'>
+        <div className="form-floating mb-3">
           <input
-            type='password'
-            name='password'
-            className='form-control'
-            id='registerPasswordInput'
-            placeholder='Password'
-            autoComplete='new-password'
-            on={handleChange}
+            type="password"
+            name="password"
+            className="form-control"
+            id="registerPasswordInput"
+            placeholder="Password"
+            autoComplete="new-password"
+            onChange={handleChange}
             required
           />
-          <label htmlFor='registerPasswordInput' className='text-black-50'>
+          <label htmlFor="registerPasswordInput" className="text-black-50">
             Password
           </label>
         </div>
-        <div className='mb-4'>
-          <label htmlFor='registerStandardSelect' className='mb-3'>
+        <div className="mb-4">
+          <label htmlFor="registerStandardSelect" className="mb-3">
             Standard:
           </label>
           <select
-            name='standard'
-            className='form-select'
-            id='registerStandardSelect'
-            aria-label='Standard'
+            name="standard"
+            className="form-select"
+            id="registerStandardSelect"
+            aria-label="Standard"
             onBlur={handleChange}
             required
           >
             <option selected disabled>
               -
             </option>
-            <option value='8'>8</option>
-            <option value='9'>9</option>
-            <option value='10'>10</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
           </select>
         </div>
-        <p>Pick a Date:</p>
-        <div class='form-check mb-1'>
-          <input
-            class='form-check-input'
-            type='radio'
-            value='0'
-            name='session'
-            id='session1Radio'
-            onChange={handleChange}
-          />
-          <label class='form-check-label' htmlFor='session1Radio'>
-            June 1 - June 7
-          </label>
-        </div>
-        <div class='form-check mb-4'>
-          <input
-            class='form-check-input'
-            type='radio'
-            value='1'
-            name='session'
-            id='session2Radio'
-            onChange={handleChange}
-          />
-          <label class='form-check-label' htmlFor='session2Radio'>
-            June 8 - June 14
-          </label>
-        </div>
-        <div className='d-grid'>
+        <div className="d-grid">
           <button
-            type='submit'
+            type="submit"
             disabled={error}
-            className='btn btn-primary display-block'
+            className="btn btn-primary display-block"
           >
             Continue
           </button>
         </div>
         {error && (
-          <div className='alert alert-danger my-3' role='alert'>
+          <div className="alert alert-danger my-3" role="alert">
             {error}
           </div>
         )}
-        <p className='mt-4 text-center'>
+        <p className="mt-4 text-center">
           <small>
-            Already registered? <Link to='/app/login/'>Log in here.</Link>
+            Already registered? <Link to="/app/login/">Log in here.</Link>
           </small>
         </p>
       </form>

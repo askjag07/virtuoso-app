@@ -1,0 +1,143 @@
+footer {
+  z-index: 100;
+}
+
+.dropup ul {
+  background-color: #343a40;
+}
+
+.video-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.video-container .OT_subscriber {
+  margin: 0.5rem;
+}
+
+.video-container.small {
+  width: 134px;
+  height: 48px;
+  z-index: 100;
+}
+.video-container.small .OT_publisher div video {
+  width: 86px;
+  height: 48px;
+}
+
+.video-container.left {
+  top: 48px;
+  bottom: 48px;
+  left: 0;
+  max-height: 100vh;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  overflow: scroll;
+  width: 172px;
+  z-index: 100;
+}
+.video-container.left .OT_subscriber {
+  width: 170px !important;
+  height: 95px !important;
+}
+
+.video-container.active-2 .OT_subscriber {
+  width: 50% !important;
+  height: 100% !important;
+}
+
+.video-container.active-3,
+.video-container.active-4,
+.video-container.active-5,
+.video-container.active-6,
+.video-container.active-7,
+.video-container.active-8,
+.video-container.active-9,
+.video-container.active-10,
+.video-container.active-11,
+.video-container.active-12,
+.video-container.active-13,
+.video-container.active-14,
+.video-container.active-15,
+.video-container.active-16,
+.video-container.active-17,
+.video-container.active-18,
+.video-container.active-19,
+.video-container.active-20,
+.video-container.active-21,
+.video-container.active-6,
+.video-container.active-6,
+.video-container.active-6,
+.video-container.active-6 {
+  flex-wrap: wrap;
+}
+
+.video-container.active-3 .OT_subscriber,
+.video-container.active-4 .OT_subscriber {
+  width: 50% !important;
+  height: 50% !important;
+}
+
+.video-container.active-5 .OT_subscriber,
+.video-container.active-6 .OT_subscriber {
+  width: 33% !important;
+  height: 50% !important;
+}
+
+.video-container.active-7 .OT_subscriber,
+.video-container.active-8 .OT_subscriber,
+.video-container.active-9 .OT_subscriber {
+  width: 33% !important;
+  height: 33% !important;
+}
+
+.video-container.active-10 .OT_subscriber,
+.video-container.active-11 .OT_subscriber,
+.video-container.active-12 .OT_subscriber {
+  width: 25% !important;
+  height: 33% !important;
+}
+
+.video-container.active-13 .OT_subscriber,
+.video-container.active-14 .OT_subscriber,
+.video-container.active-15 .OT_subscriber,
+.video-container.active-16 .OT_subscriber {
+  width: 25% !important;
+  height: 25% !important;
+}
+
+.video-container.active-17 .OT_subscriber,
+.video-container.active-18 .OT_subscriber,
+.video-container.active-19 .OT_subscriber,
+.video-container.active-20 .OT_subscriber {
+  width: 20% !important;
+  height: 25% !important;
+}
+
+.video-container.active-21 .OT_subscriber,
+.video-container.active-22 .OT_subscriber,
+.video-container.active-23 .OT_subscriber,
+.video-container.active-24 .OT_subscriber,
+.video-container.active-25 .OT_subscriber {
+  width: 20% !important;
+  height: 20% !important;
+}
+
+.video-container.active-26 .OT_subscriber,
+.video-container.active-27 .OT_subscriber,
+.video-container.active-28 .OT_subscriber,
+.video-container.active-29 .OT_subscriber,
+.video-container.active-30 .OT_subscriber {
+  width: 16% !important;
+  height: 20% !important;
+}
+
+.video-container.active-31 .OT_subscriber,
+.video-container.active-32 .OT_subscriber,
+.video-container.active-33 .OT_subscriber,
+.video-container.active-34 .OT_subscriber,
+.video-container.active-35 .OT_subscriber,
+.video-container.active-36 .OT_subscriber {
+  width: 16% !important;
+  height: 16% !important;
+}

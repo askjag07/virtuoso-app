@@ -6,7 +6,15 @@ export const isAuthenticated = function () {
   if (!isBrowser) {
     return null
   }
-  return window.sessionStorage.getItem('isAuthenticated') !== null
+  if (
+    window.sessionStorage.getItem('isAuthenticated') === null ||
+    window.sessionStorage.getItem('token') === null ||
+    window.sessionStorage.getItem('profile') === null
+  ) {
+    window.sessionStorage.clear()
+    return false
+  }
+  return true
 }
 
 export const authorize = async function (userData, type) {
@@ -24,18 +32,17 @@ export const authorize = async function (userData, type) {
   let response = await res.json()
   if (response.error) {
     return response.error
-  } else {
-    window.sessionStorage.clear()
-    window.sessionStorage.setItem('isAuthenticated', 'true')
-    window.sessionStorage.setItem('token', response.token)
-
-    let profile = JSON.parse(atob(response.token.split('.')[1]))
-    delete profile.exp
-    profile.Email = userData.email
-
-    window.sessionStorage.setItem('profile', JSON.stringify(profile))
-
-    navigate('/app/')
-    return null
   }
+  window.sessionStorage.clear()
+  window.sessionStorage.setItem('isAuthenticated', 'true')
+  window.sessionStorage.setItem('token', response.token)
+
+  let profile = JSON.parse(atob(response.token.split('.')[1]))
+  delete profile.exp
+  profile.Email = userData.email
+
+  window.sessionStorage.setItem('profile', JSON.stringify(profile))
+
+  navigate('/app/')
+  return null
 }
