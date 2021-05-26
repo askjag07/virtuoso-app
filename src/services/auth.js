@@ -23,7 +23,7 @@ export const authorize = async function (userData, type) {
   }
 
   let types = ['register', 'login']
-  let res = await fetch(`http://localhost:8080/auth/${types[type]}`, {
+  let res = await fetch(`https://govirtuoso.org/api/auth/${types[type]}`, {
     method: 'POST',
     headers: new Headers().append('Content-Type', 'application/json'),
     body: JSON.stringify(userData),

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 
+import Seo from '../components/seo'
+
 import { authorize } from '../services/auth'
 
 const formReducer = function (state, event) {
@@ -81,6 +83,7 @@ export default function Register() {
 
   return (
     <>
+      <Seo title="Register" />
       {loading && (
         <div
           className="spinner-border text-primary center position-absolute"

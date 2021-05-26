@@ -1,5 +1,5 @@
 export const getStudents = async function (token) {
-  let res = await fetch(`http://localhost:8080/students`, {
+  let res = await fetch(`https://govirtuoso.org/api/students`, {
     method: 'GET',
     headers: new Headers({
       'content-type': 'application/json',

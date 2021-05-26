@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import Seo from '../components/seo'
+
 import Layout from '../components/layout'
 
 export default function Dashboard() {
@@ -77,6 +79,7 @@ export default function Dashboard() {
   })
   return (
     <Layout>
+      <Seo title="Dashboard" />
       <h1 className="py-3 mt-5">Hello {profile.Full_name}!</h1>
       <hr />
       <div className="pt-3 row">
@@ -114,6 +117,24 @@ export default function Dashboard() {
         })}
       </div>
       <hr />
+      {profile.Admin && (
+        <Link
+          className="sessions card bg-light shadow-sm border-0 p-4 mx-3 mb-4"
+          to="/app/meet/"
+          state={{ session: 0 }}
+        >
+          <div>
+            <h5>Join Test Meeting</h5>
+          </div>
+          <p className="m-0">
+            <small>
+              Date: N/A
+              <br />
+              Time: N/A
+            </small>
+          </p>
+        </Link>
+      )}
     </Layout>
   )
 }

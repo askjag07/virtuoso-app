@@ -1,4 +1,7 @@
 import React from 'react'
+
+import Seo from '../components/seo'
+
 import Layout from '../components/layout'
 
 export default function Resources() {
@@ -34,6 +37,7 @@ export default function Resources() {
       link="Resources"
       className="d-flex justify-content-center align-items-center"
     >
+      <Seo title="Resources" />
       <h1 className="py-3 mt-5">Resources</h1>
       <hr />
       <ul className="list-group my-4">

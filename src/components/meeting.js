@@ -107,7 +107,6 @@ export default class Meeting extends React.Component {
       extensionID: 'plocfffmbcclpdifaikiikgplfnepkpo',
       annotation: false,
       externalWindow: false,
-      dev: true,
       localScreenProperties: {
         insertMode: 'append',
         width: '100%',
