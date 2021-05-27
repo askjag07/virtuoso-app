@@ -1,8 +1,10 @@
 import React from 'react'
+import { navigate } from 'gatsby'
 
 import Seo from '../components/seo'
-
 import Layout from '../components/layout'
+
+import { getAuthenticated } from '../services/auth'
 
 const resources = [
   {
@@ -32,6 +34,14 @@ const resources = [
 ]
 
 export default class Resources extends React.Component {
+  componentDidMount() {
+    const { authenticated } = getAuthenticated()
+    if (!authenticated) {
+      navigate('/app/login/', {
+        replace: true,
+      })
+    }
+  }
   render() {
     return (
       <Layout

@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 
 import Seo from '../components/seo'
 
 import Layout from '../components/layout'
+
+import { getAuthenticated } from '../services/auth'
 
 let sessions = []
 const sessions0 = [
@@ -66,27 +68,34 @@ export default class Dashboard extends React.Component {
     }
   }
   componentDidMount() {
-    const p = JSON.parse(window.sessionStorage.getItem('profile'))
-    this.setState({
-      profile: p,
-    })
-    switch (p.Session) {
-      default:
-        sessions = sessions0
-        break
-      case 1:
-        sessions = sessions1
-        break
-      case 2:
-        sessions = sessions0.concat(sessions1)
-        break
+    const { authenticated } = getAuthenticated()
+    if (!authenticated) {
+      navigate('/app/login/', {
+        replace: true,
+      })
+    } else {
+      const p = JSON.parse(window.sessionStorage.getItem('profile'))
+      this.setState({
+        profile: p,
+      })
+      switch (p.Session) {
+        default:
+          sessions = sessions0
+          break
+        case 1:
+          sessions = sessions1
+          break
+        case 2:
+          sessions = sessions0.concat(sessions1)
+          break
+      }
+      sessions.map(function (session, index) {
+        sessions[index].nyet =
+          session.date.getTime() - 300000 > new Date().getTime() ||
+          session.date.getTime() + 5400000 < new Date().getTime()
+        return null
+      })
     }
-    sessions.map(function (session, index) {
-      sessions[index].nyet =
-        session.date.getTime() - 300000 > new Date().getTime() ||
-        session.date.getTime() + 5400000 < new Date().getTime()
-      return null
-    })
   }
   render() {
     const { profile } = this.state

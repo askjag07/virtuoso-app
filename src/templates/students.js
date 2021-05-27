@@ -1,8 +1,10 @@
 import React from 'react'
-import Layout from '../components/layout'
+import { navigate } from 'gatsby'
 
+import Layout from '../components/layout'
 import Seo from '../components/seo'
 
+import { getAuthenticated } from '../services/auth'
 import { getStudents } from '../services/students'
 
 export default class Students extends React.Component {
@@ -19,9 +21,23 @@ export default class Students extends React.Component {
 
   componentDidMount() {
     this._isMounted = true
-    getStudents(window.sessionStorage.getItem('token')).then(res =>
-      this.handleResponse(res)
-    )
+    const { authenticated, admin } = getAuthenticated()
+    if (!authenticated) {
+      this.setState({ loading: false })
+      navigate('/app/login/', {
+        replace: true,
+      })
+    } else {
+      if (admin) {
+        getStudents(window.sessionStorage.getItem('token')).then(res =>
+          this.handleResponse(res)
+        )
+      } else {
+        navigate('/app/', {
+          replace: true,
+        })
+      }
+    }
   }
 
   handleResponse(res) {
