@@ -11,7 +11,9 @@ export default class Layout extends React.Component {
   }
   logout() {
     window.sessionStorage.clear()
-    navigate('/app/login/')
+    navigate('/app/login/', {
+      replace: true,
+    })
   }
   getLinks(link) {
     let jsx

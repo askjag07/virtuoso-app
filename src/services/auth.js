@@ -43,6 +43,8 @@ export const authorize = async function (userData, type) {
 
   window.sessionStorage.setItem('profile', JSON.stringify(profile))
 
-  navigate('/app/')
+  navigate('/app/', {
+    replace: true,
+  })
   return null
 }
