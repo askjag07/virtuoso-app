@@ -1,13 +1,15 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-export default function Seo({ title }) {
-  return (
-    <>
-      <Helmet title={`* ${title} | Virtuoso`} defer={false} />
-      <Helmet>
-        <script type="application/ld+json">
-          {`
+export default class Seo extends React.Component {
+  render() {
+    const { title } = this.props
+    return (
+      <>
+        <Helmet title={`* ${title} | Virtuoso`} defer={false} />
+        <Helmet>
+          <script type="application/ld+json">
+            {`
                 {
                     "@context": "https://govirtuoso.org",
                     "@type": "Virtuoso",
@@ -20,8 +22,9 @@ export default function Seo({ title }) {
                     }
                 }
             `}
-        </script>
-      </Helmet>
-    </>
-  )
+          </script>
+        </Helmet>
+      </>
+    )
+  }
 }

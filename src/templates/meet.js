@@ -5,14 +5,18 @@ import Seo from '../components/seo'
 
 import Meeting from '../components/meeting'
 
-export default function Meet() {
-  if (!window.history.state) {
-    navigate('/app/')
+export default class Meet extends React.Component {
+  componentDidMount() {
+    if (!window.history.state) {
+      navigate('/app/')
+    }
   }
-  return (
-    <>
-      <Seo title="Meeting" />
-      {window.history.state && <Meeting />}
-    </>
-  )
+  render() {
+    return (
+      <>
+        <Seo title="Meeting" />
+        {window.history.state && <Meeting />}
+      </>
+    )
+  }
 }

@@ -2,19 +2,22 @@ import React from 'react'
 import { navigate } from 'gatsby'
 import { isAuthenticated } from '../services/auth'
 
-export default function Guard({
-  component: Component,
-  admin,
-  location,
-  ...rest
-}) {
-  if (!isAuthenticated()) {
-    navigate('/app/login/')
-    return null
+export default class Guard extends React.Component {
+  componentDidMount() {
+    if (!isAuthenticated()) {
+      navigate('/app/login/')
+      return null
+    }
+    if (
+      this.props.admin &&
+      !JSON.parse(window.sessionStorage.getItem('profile')).Admin
+    ) {
+      navigate('/app/login/')
+      return null
+    }
   }
-  if (admin && !JSON.parse(window.sessionStorage.getItem('profile')).Admin) {
-    navigate('/app/login/')
-    return null
+  render() {
+    const { Component, ...rest } = this.props
+    return <Component {...rest} />
   }
-  return <Component {...rest} />
 }

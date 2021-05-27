@@ -16,7 +16,7 @@ module.exports = {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true,
-        ignore: ['./src/styles/meeting.scss'],
+        purgeOnly: ['src/styles/global.scss'],
       },
     },
     `gatsby-plugin-image`,

@@ -7,13 +7,7 @@ import 'bootstrap/js/dist/dropdown'
 import '../styles/meeting.scss'
 
 let profile = {}
-const otSDK = new OpenTokSDK({
-  apiKey: '47239104',
-  sessionId:
-    '1_MX40NzIzOTEwNH5-MTYyMjAwNDU1MTc3NX55Wm5iYzlNbjdiUkNQc0NyeTBJd0J2TzF-fg',
-  token:
-    'T1==cGFydG5lcl9pZD00NzIzOTEwNCZzaWc9YmJlMjc1MjZkMTNkZDA3ZGE5NTk4YTNkNzNhYzdiYTk1ZGZjOTk4MTpzZXNzaW9uX2lkPTFfTVg0ME56SXpPVEV3Tkg1LU1UWXlNakF3TkRVMU1UYzNOWDU1V201aVl6bE5iamRpVWtOUWMwTnllVEJKZDBKMlR6Ri1mZyZjcmVhdGVfdGltZT0xNjIyMDA0NTcyJm5vbmNlPTAuNjYyNTQ5Nzc1MTcwMjk2NyZyb2xlPW1vZGVyYXRvciZleHBpcmVfdGltZT0xNjI0NTk2NTY5JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9',
-})
+let otSDK
 
 export default class Meeting extends React.Component {
   constructor(props) {
@@ -39,6 +33,13 @@ export default class Meeting extends React.Component {
   }
 
   componentDidMount() {
+    otSDK = new OpenTokSDK({
+      apiKey: '47239104',
+      sessionId:
+        '1_MX40NzIzOTEwNH5-MTYyMjAwNDU1MTc3NX55Wm5iYzlNbjdiUkNQc0NyeTBJd0J2TzF-fg',
+      token:
+        'T1==cGFydG5lcl9pZD00NzIzOTEwNCZzaWc9YmJlMjc1MjZkMTNkZDA3ZGE5NTk4YTNkNzNhYzdiYTk1ZGZjOTk4MTpzZXNzaW9uX2lkPTFfTVg0ME56SXpPVEV3Tkg1LU1UWXlNakF3TkRVMU1UYzNOWDU1V201aVl6bE5iamRpVWtOUWMwTnllVEJKZDBKMlR6Ri1mZyZjcmVhdGVfdGltZT0xNjIyMDA0NTcyJm5vbmNlPTAuNjYyNTQ5Nzc1MTcwMjk2NyZyb2xlPW1vZGVyYXRvciZleHBpcmVfdGltZT0xNjI0NTk2NTY5JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9',
+    })
     const session = otSDK.session
     otSDK
       .connect()

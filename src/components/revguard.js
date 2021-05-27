@@ -2,10 +2,15 @@ import React from 'react'
 import { navigate } from 'gatsby'
 import { isAuthenticated } from '../services/auth'
 
-export default function RevGuard({ component: Component, location, ...rest }) {
-  if (isAuthenticated()) {
-    navigate('/app/')
-    return null
+export default class RevGuard extends React.Component {
+  componentDidMount() {
+    if (isAuthenticated()) {
+      navigate('/app/')
+      return null
+    }
   }
-  return <Component {...rest} />
+  render() {
+    const { Component, ...rest } = this.props
+    return <Component {...rest} />
+  }
 }

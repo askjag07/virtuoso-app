@@ -13,6 +13,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
             test: /bootstrap/,
             use: loaders.null(),
           },
+          {
+            test: /opentok-accelerator-core/,
+            use: loaders.null(),
+          },
         ],
       },
     })
