@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigate } from 'gatsby-link'
+import { navigate } from 'gatsby'
 import { OpenTokSDK } from 'opentok-accelerator-core'
 import ScreenShareAccPack from 'opentok-screen-sharing'
 import 'bootstrap/js/dist/dropdown'

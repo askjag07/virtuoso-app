@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigate } from 'gatsby'
+import { navigate } from '@reach/router'
 import { Helmet } from 'react-helmet'
 
 import { getAuthenticated } from '../services/auth'
