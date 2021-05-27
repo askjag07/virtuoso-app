@@ -23,7 +23,6 @@ export default class Students extends React.Component {
     this._isMounted = true
     const { authenticated, admin } = getAuthenticated()
     if (!authenticated) {
-      this.setState({ loading: false })
       navigate('/app/login/', {
         replace: true,
       })
