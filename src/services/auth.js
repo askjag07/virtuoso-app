@@ -1,27 +1,27 @@
 import { navigate } from 'gatsby'
 
-const isBrowser = typeof window !== 'undefined'
-
-export const isAuthenticated = function () {
-  if (!isBrowser) {
-    return null
-  }
+export const getAuthenticated = function () {
+  let profile = window.sessionStorage.getItem('profile')
   if (
     window.sessionStorage.getItem('isAuthenticated') === null ||
     window.sessionStorage.getItem('token') === null ||
-    window.sessionStorage.getItem('profile') === null
+    profile === null
   ) {
     window.sessionStorage.clear()
-    return false
+    return {
+      authenticated: false,
+      admin: false,
+      state: false,
+    }
   }
-  return true
+  return {
+    authenticated: true,
+    admin: JSON.parse(profile).Admin,
+    state: !!window.history.state,
+  }
 }
 
 export const authorize = async function (userData, type) {
-  if (!isBrowser) {
-    return null
-  }
-
   let types = ['register', 'login']
   let res = await fetch(`https://govirtuoso.org/api/auth/${types[type]}`, {
     method: 'POST',

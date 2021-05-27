@@ -5,7 +5,6 @@ import Seo from '../components/seo'
 
 import Layout from '../components/layout'
 
-let profile = {}
 let sessions = []
 const sessions0 = [
   {
@@ -60,16 +59,25 @@ const sessions1 = [
   },
 ]
 export default class Dashboard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      profile: {},
+    }
+  }
   componentDidMount() {
-    profile = JSON.parse(window.sessionStorage.getItem('profile'))
-    switch (profile.Session) {
-      case 0:
+    const p = JSON.parse(window.sessionStorage.getItem('profile'))
+    this.setState({
+      profile: p,
+    })
+    switch (p.Session) {
+      default:
         sessions = sessions0
         break
       case 1:
         sessions = sessions1
         break
-      default:
+      case 2:
         sessions = sessions0.concat(sessions1)
         break
     }
@@ -81,6 +89,7 @@ export default class Dashboard extends React.Component {
     })
   }
   render() {
+    const { profile } = this.state
     return (
       <Layout>
         <Seo title="Dashboard" />
