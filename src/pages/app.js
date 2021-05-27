@@ -18,7 +18,7 @@ export default class Index extends React.Component {
         <Meet path="/meet" />
         <Login path="/login" />
         <Register path="/register" />
-        <Redirect from="*" to="/app/login/" noThrow />
+        <Redirect from="*" to="/app/" noThrow />
       </Router>
     )
   }
