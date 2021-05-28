@@ -82,9 +82,6 @@ export default class Dashboard extends React.Component {
         case 1:
           sessions = sessions1
           break
-        case 2:
-          sessions = sessions0.concat(sessions1)
-          break
       }
       sessions.map(function (session, index) {
         sessions[index].nyet =

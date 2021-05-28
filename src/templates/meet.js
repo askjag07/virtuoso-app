@@ -2,7 +2,6 @@ import React from 'react'
 import { navigate } from 'gatsby'
 import { OpenTokSDK } from 'opentok-accelerator-core'
 import ScreenShareAccPack from 'opentok-screen-sharing'
-import 'bootstrap/js/dist/dropdown'
 
 import Seo from '../components/seo'
 import '../styles/meeting.scss'
@@ -25,6 +24,7 @@ export default class Meet extends React.Component {
     localPublisherId: null,
     localAudioEnabled: true,
     localVideoEnabled: true,
+    admin: true,
   }
   constructor(props) {
     super(props)
@@ -39,7 +39,8 @@ export default class Meet extends React.Component {
 
   componentDidMount() {
     this._isMounted = true
-    const { state } = getAuthenticated()
+    const { state, admin } = getAuthenticated()
+    this.setState({ admin: admin })
     if (!state) {
       navigate('/app/login/', {
         replace: true,
@@ -238,8 +239,14 @@ export default class Meet extends React.Component {
     this._isMounted = false
   }
   render() {
-    const { meta, connected, active, localAudioEnabled, localVideoEnabled } =
-      this.state
+    const {
+      admin,
+      meta,
+      connected,
+      active,
+      localAudioEnabled,
+      localVideoEnabled,
+    } = this.state
 
     if (connected && !active) {
       this.startCall()
@@ -393,78 +400,39 @@ export default class Meet extends React.Component {
                 <path d="M11.414 11H14.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-13a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h3.086l-1 1H1.5A1.5 1.5 0 0 1 0 10.5v-7A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v7a1.5 1.5 0 0 1-1.5 1.5h-2.086l-1-1z" />
               </svg>
             </button>
-            <div className="btn-group dropup">
-              <button
-                className={`btn text-white mb-1 ${
-                  profile.Admin ? '' : 'd-none'
-                }`}
-                data-bs-toggle="dropdown"
-                data-bs-offset="0,10"
-                aria-expanded="false"
-                type="button"
-                id="dropdownToggle"
+            <button
+              className={`btn mb-1 text-white ${admin ? '' : 'd-none'}`}
+              type="button"
+              onClick={this.toggleAudio}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                </svg>
-              </button>
-              <ul
-                class="dropdown-menu shadow-lg"
-                aria-labelledby="dropdownToggle"
+                <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z" />
+              </svg>
+            </button>
+            <button
+              className={`btn mb-1 text-white ${admin ? '' : 'd-none'}`}
+              type="button"
+              onClick={this.kickOut}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
               >
-                <li>
-                  <button
-                    className="btn btn-sm text-white"
-                    type="button"
-                    onClick={this.kickOut}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                      className="me-3"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"
-                      />
-                    </svg>
-                    Kick Out
-                  </button>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <button
-                    className="btn btn-sm text-white"
-                    type="button"
-                    onClick={this.toggleAudio}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                      className="me-3"
-                    >
-                      <path d="M13 8c0 .564-.094 1.107-.266 1.613l-.814-.814A4.02 4.02 0 0 0 12 8V7a.5.5 0 0 1 1 0v1zm-5 4c.818 0 1.578-.245 2.212-.667l.718.719a4.973 4.973 0 0 1-2.43.923V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 1 0v1a4 4 0 0 0 4 4zm3-9v4.879L5.158 2.037A3.001 3.001 0 0 1 11 3z" />
-                      <path d="M9.486 10.607 5 6.12V8a3 3 0 0 0 4.486 2.607zm-7.84-9.253 12 12 .708-.708-12-12-.708.708z" />
-                    </svg>
-                    Mute All
-                  </button>
-                </li>
-              </ul>
-            </div>
+                <path
+                  fill-rule="evenodd"
+                  d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"
+                />
+              </svg>
+            </button>
             <button
               className="btn btn-danger ms-2"
               type="button"

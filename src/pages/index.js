@@ -59,7 +59,10 @@ export default class Home extends React.Component {
               </svg>
               &nbsp; Syllabus
             </a>
-            <Link to="/app/login" className="btn btn-outline-primary shadow-sm">
+            <Link
+              to="/app/login"
+              className="btn btn-outline-primary shadow-sm mb-3"
+            >
               Log In
             </Link>
           </div>
