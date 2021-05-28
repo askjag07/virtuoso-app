@@ -13,10 +13,9 @@ export default class About extends React.Component {
       type: 'React Framework',
     },
     {
-      name: 'Preact',
-      description:
-        'A lighter and faster alternative to the populer web library, React.',
-      link: 'https://preactjs.com/guide/v10/getting-started',
+      name: 'React',
+      description: 'The most popular JavaScript library for building websites.',
+      link: 'https://reactjs.org/tutorial/tutorial.html',
       type: 'JavaScript Library',
     },
     {

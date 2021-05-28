@@ -9,29 +9,16 @@ import { getAuthenticated } from '../services/auth'
 const resources = [
   {
     name: 'session1.zip',
-    description:
-      'Get used to Visual Studio Code and the file structure for this class.',
+    description: 'Use Visual Studio Code to set up a basic file structure.',
   },
   {
     name: 'session2.zip',
     description:
-      'Learn about the types of variables and their logical and arithmetic operations.',
+      'Learn about the variables and logical operations with a test.',
   },
   {
     name: 'session3.zip',
-    description: 'Coming soon...',
-  },
-  {
-    name: 'session4.zip',
-    description: 'Coming soon...',
-  },
-  {
-    name: 'session5.zip',
-    description: 'Coming soon...',
-  },
-  {
-    name: 'session6.zip',
-    description: 'Coming soon...',
+    description: 'Master JavaScript basics and create a calculator program.',
   },
 ]
 
