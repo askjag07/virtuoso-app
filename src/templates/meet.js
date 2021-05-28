@@ -13,29 +13,32 @@ let profile = {}
 let otSDK
 
 export default class Meet extends React.Component {
+  _isMounted = false
+  state = {
+    session: null,
+    connected: false,
+    active: false,
+    publishers: null,
+    subscribers: null,
+    meta: null,
+    streamMap: null,
+    localPublisherId: null,
+    localAudioEnabled: true,
+    localVideoEnabled: true,
+  }
   constructor(props) {
     super(props)
-    this.state = {
-      session: null,
-      connected: false,
-      active: false,
-      publishers: null,
-      subscribers: null,
-      meta: null,
-      streamMap: null,
-      localPublisherId: null,
-      localAudioEnabled: true,
-      localVideoEnabled: true,
-    }
     this.handleSignal = this.handleSignal.bind(this)
     this.startCall = this.startCall.bind(this)
     this.endCall = this.endCall.bind(this)
     this.toggleLocalAudio = this.toggleLocalAudio.bind(this)
     this.toggleLocalVideo = this.toggleLocalVideo.bind(this)
+    this.toggleAudio = this.toggleAudio.bind(this)
     this.kickOut = this.kickOut.bind(this)
   }
 
   componentDidMount() {
+    this._isMounted = true
     const { state } = getAuthenticated()
     if (!state) {
       navigate('/app/login/', {
@@ -58,166 +61,182 @@ export default class Meet extends React.Component {
   }
 
   startCall() {
-    const { session, streamMap } = this.state
+    if (this._isMounted) {
+      const { session, streamMap } = this.state
 
-    const subscribeToStream = stream => {
-      if (streamMap && streamMap[stream.id]) {
-        return
+      const subscribeToStream = stream => {
+        if (streamMap && streamMap[stream.id]) {
+          return
+        }
+        const type = stream.videoType
+        otSDK
+          .subscribe(stream, `${type}SubscriberContainer`, {
+            insertMode: 'append',
+            width: '100%',
+            height: '100%',
+            showControls: true,
+            style: {
+              buttonDisplayMode: 'off',
+              nameDisplayMode: 'on',
+              archiveStatusDisplayMode: 'off',
+              audioLevelDisplayMode: 'off',
+            },
+            fitMode: 'contain',
+          })
+          .then(() => this.setState(otSDK.state()))
       }
-      const type = stream.videoType
+
+      session.streams.forEach(subscribeToStream)
+
+      otSDK.on({
+        streamCreated: ({ stream }) => subscribeToStream(stream),
+        streamDestroyed: () => this.setState(otSDK.state()),
+        signal: e => this.handleSignal(e),
+      })
+
       otSDK
-        .subscribe(stream, `${type}SubscriberContainer`, {
+        .publish('cameraPublisherContainer', {
           insertMode: 'append',
           width: '100%',
           height: '100%',
           showControls: true,
+          name: profile.Full_name,
+          style: {
+            buttonDisplayMode: 'off',
+            nameDisplayMode: 'off',
+            archiveStatusDisplayMode: 'off',
+            audioLevelDisplayMode: 'on',
+          },
+        })
+        .then(publisher => {
+          this.setState(
+            Object.assign({}, otSDK.state(), { localPublisherId: publisher.id })
+          )
+        })
+        .catch(error => console.error(error))
+
+      this.setState({ active: true })
+      new ScreenShareAccPack({
+        session: session,
+        screenSharingContainer: 'screenPublisherContainer',
+        extensionID: 'plocfffmbcclpdifaikiikgplfnepkpo',
+        annotation: false,
+        externalWindow: false,
+        localScreenProperties: {
+          insertMode: 'append',
+          width: '100%',
+          height: '100%',
+          showControls: true,
+          name: profile.Full_name,
           style: {
             buttonDisplayMode: 'off',
             nameDisplayMode: 'on',
             archiveStatusDisplayMode: 'off',
             audioLevelDisplayMode: 'off',
           },
+          videoSource: 'window',
           fitMode: 'contain',
-        })
-        .then(() => this.setState(otSDK.state()))
+        },
+      })
     }
-
-    session.streams.forEach(subscribeToStream)
-
-    otSDK.on({
-      streamCreated: ({ stream }) => subscribeToStream(stream),
-      streamDestroyed: () => this.setState(otSDK.state()),
-      signal: e => this.handleSignal(e),
-    })
-
-    otSDK
-      .publish('cameraPublisherContainer', {
-        insertMode: 'append',
-        width: '100%',
-        height: '100%',
-        showControls: true,
-        name: profile.Full_name,
-        style: {
-          buttonDisplayMode: 'off',
-          nameDisplayMode: 'off',
-          archiveStatusDisplayMode: 'off',
-          audioLevelDisplayMode: 'on',
-        },
-      })
-      .then(publisher => {
-        this.setState(
-          Object.assign({}, otSDK.state(), { localPublisherId: publisher.id })
-        )
-      })
-      .catch(error => console.error(error))
-
-    this.setState({ active: true })
-    new ScreenShareAccPack({
-      session: session,
-      screenSharingContainer: 'screenPublisherContainer',
-      extensionID: 'plocfffmbcclpdifaikiikgplfnepkpo',
-      annotation: false,
-      externalWindow: false,
-      localScreenProperties: {
-        insertMode: 'append',
-        width: '100%',
-        height: '100%',
-        showControls: true,
-        name: profile.Full_name,
-        style: {
-          buttonDisplayMode: 'off',
-          nameDisplayMode: 'on',
-          archiveStatusDisplayMode: 'off',
-          audioLevelDisplayMode: 'off',
-        },
-        videoSource: 'window',
-        fitMode: 'contain',
-      },
-    })
   }
 
   handleSignal(e) {
-    if (!profile.Admin) {
-      switch (e.data.replace(/"/g, '')) {
-        case 'mute':
-          otSDK.enablePublisherAudio(false)
-          this.setState({ localAudioEnabled: false })
-          break
-        case 'bye':
-          this.endCall()
-          break
-        default:
-          console.log(e)
+    if (this._isMounted) {
+      if (!profile.Admin) {
+        switch (e.data.replace(/"/g, '')) {
+          case 'mute':
+            otSDK.enablePublisherAudio(false)
+            this.setState({ localAudioEnabled: false })
+            break
+          case 'bye':
+            this.endCall()
+            break
+          default:
+            console.log(e)
+        }
       }
     }
   }
 
   endCall() {
-    otSDK.disconnect()
-    this.setState({
-      session: null,
-      connected: false,
-      active: false,
-      publishers: null,
-      subscribers: null,
-      meta: null,
-      streamMap: null,
-      localPublisherId: null,
-      localAudioEnabled: true,
-      localVideoEnabled: true,
-    })
-    window.localStorage.clear()
-    navigate('/app/')
+    if (this._isMounted) {
+      otSDK.disconnect()
+      this.setState({
+        session: null,
+        connected: false,
+        active: false,
+        publishers: null,
+        subscribers: null,
+        meta: null,
+        streamMap: null,
+        localPublisherId: null,
+        localAudioEnabled: true,
+        localVideoEnabled: true,
+      })
+      window.localStorage.clear()
+      navigate('/app/')
+    }
   }
 
   toggleLocalAudio() {
-    const { localAudioEnabled } = this.state
-    const enabled = !localAudioEnabled
-    otSDK.enablePublisherAudio(enabled)
-    this.setState({ localAudioEnabled: enabled })
+    if (this._isMounted) {
+      const { localAudioEnabled } = this.state
+      const enabled = !localAudioEnabled
+      otSDK.enablePublisherAudio(enabled)
+      this.setState({ localAudioEnabled: enabled })
+    }
   }
 
   toggleLocalVideo() {
-    const { localVideoEnabled } = this.state
-    const enabled = !localVideoEnabled
-    otSDK.enablePublisherVideo(enabled)
-    this.setState({ localVideoEnabled: enabled })
+    if (this._isMounted) {
+      const { localVideoEnabled } = this.state
+      const enabled = !localVideoEnabled
+      otSDK.enablePublisherVideo(enabled)
+      this.setState({ localVideoEnabled: enabled })
+    }
   }
 
   toggleAudio() {
-    otSDK.signal('mod', 'mute', null, function (error) {
-      if (error) {
-        console.error(`SIGERR (${error.name}):\n\n${error.message}`)
-      } else {
-        console.log('Signal sent.')
-      }
-    })
+    if (this._isMounted) {
+      otSDK.signal('mod', 'mute', null, function (error) {
+        if (error) {
+          console.error(`SIGERR (${error.name}):\n\n${error.message}`)
+        } else {
+          console.log('Signal sent.')
+        }
+      })
+    }
   }
 
   kickOut() {
-    const { subscribers } = this.state
-    document.querySelectorAll('.OT_subscriber').forEach(function (item) {
-      item.addEventListener('dblclick', function (e) {
-        otSDK.signal(
-          'mod',
-          'bye',
-          subscribers.camera[e.target.parentElement.parentElement.id].stream
-            .connection,
-          function (error) {
-            if (error) {
-              console.error(`SIGERR (${error.name}):\n\n${error.message}`)
-            } else {
-              console.log('Signal sent.')
+    if (this._isMounted) {
+      const { subscribers } = this.state
+      document.querySelectorAll('.OT_subscriber').forEach(function (item) {
+        item.addEventListener('dblclick', function (e) {
+          otSDK.signal(
+            'mod',
+            'bye',
+            subscribers.camera[e.target.parentElement.parentElement.id].stream
+              .connection,
+            function (error) {
+              if (error) {
+                console.error(`SIGERR (${error.name}):\n\n${error.message}`)
+              } else {
+                console.log('Signal sent.')
+              }
             }
-          }
-        )
-        item.removeEventListener('dblclick', function () {
-          console.log('Kicked.')
+          )
+          item.removeEventListener('dblclick', function () {
+            console.log('Kicked.')
+          })
         })
       })
-    })
+    }
   }
-
+  componentWillUnmount() {
+    this._isMounted = false
+  }
   render() {
     const { meta, connected, active, localAudioEnabled, localVideoEnabled } =
       this.state
@@ -229,17 +248,17 @@ export default class Meet extends React.Component {
     return (
       <div className="position-fixed bottom-0 left-0 start-0 end-0">
         <Seo title="Meeting" />
-        {!connected && (
-          <div
-            className="spinner-border text-primary center position-fixed"
-            role="status"
-          >
-            <span className="visually-hidden">Connecting...</span>
-          </div>
-        )}
         <div
-          className={`App-video-container justify-content-center align-items-center bg-black vw-100 vh-100 ${
-            active ? 'd-flex' : 'd-none'
+          className={`spinner-border text-primary center position-fixed ${
+            connected ? 'visible' : 'invisible'
+          }`}
+          role="status"
+        >
+          <span className="visually-hidden">Connecting...</span>
+        </div>
+        <div
+          className={`App-video-container justify-content-center align-items-center bg-black vw-100 vh-100 d-flex ${
+            active ? 'visible' : 'invisible'
           }`}
         >
           <div
@@ -274,25 +293,25 @@ export default class Meet extends React.Component {
               </small>
             </button>
           </div>
-          <div id="screenPublisherContainer" className="d-none" />
+          <div id="screenPublisherContainer" className="invisible" />
           <div
             id="cameraSubscriberContainer"
             className={`video-container d-flex justify-content-center align-items-center ${
               (meta ? meta.subscriber.screen : false)
                 ? 'left'
                 : `active-${meta ? meta.subscriber.camera : 0} `
-            } ${(meta ? meta.subscriber.camera : 0) ? '' : 'd-none'}`}
+            } ${(meta ? meta.subscriber.camera : 0) ? 'visible' : 'invisible'}`}
           />
           <div
             id="screenSubscriberContainer"
             className={`video-container ${
-              !(meta ? meta.subscriber.screen : false) ? 'd-none' : ''
+              !(meta ? meta.subscriber.screen : false) ? 'invisible' : 'visible'
             }`}
           ></div>
         </div>
         <footer
-          className={`position-fixed bottom-0 mb-3 justify-content-center align-items-center w-100 ${
-            active ? 'd-flex' : 'd-none'
+          className={`position-fixed bottom-0 mb-3 justify-content-center align-items-center w-100 d-flex ${
+            active ? 'visible' : 'invisible'
           }`}
         >
           <div id="controls" className="bg-dark rounded shadow-lg p-2">
@@ -359,7 +378,9 @@ export default class Meet extends React.Component {
               )}
             </button>
             <button
-              className={`btn text-white mb-1 ${profile.Admin ? '' : 'd-none'}`}
+              className={`btn text-white mb-1 ${
+                profile.Admin ? 'visible' : 'invisible'
+              }`}
               id="startScreenSharing"
               type="button"
             >
@@ -377,7 +398,7 @@ export default class Meet extends React.Component {
             <div className="btn-group dropup">
               <button
                 className={`btn text-white mb-1 ${
-                  profile.Admin ? '' : 'd-none'
+                  profile.Admin ? 'visible' : 'invisible'
                 }`}
                 data-bs-toggle="dropdown"
                 data-bs-offset="0,10"

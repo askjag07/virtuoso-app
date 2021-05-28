@@ -61,11 +61,8 @@ const sessions1 = [
   },
 ]
 export default class Dashboard extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      profile: {},
-    }
+  state = {
+    profile: {},
   }
   componentDidMount() {
     const { authenticated } = getAuthenticated()

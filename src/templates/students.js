@@ -9,14 +9,14 @@ import { getStudents } from '../services/students'
 
 export default class Students extends React.Component {
   _isMounted = false
+  state = {
+    loading: true,
+    students: null,
+  }
 
   constructor(props) {
     super(props)
-
-    this.state = {
-      loading: true,
-      students: null,
-    }
+    this.handleResponse = this.handleResponse.bind(this)
   }
 
   componentDidMount() {
@@ -60,54 +60,53 @@ export default class Students extends React.Component {
         <Seo title="Students" />
         <h1 className="py-3 mt-5">Students</h1>
         <hr />
-        {loading ? (
-          <div
-            className="spinner-border text-primary center position-absolute"
-            role="status"
-          >
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        ) : (
-          <>
-            <div className="table-responsive-sm">
-              <table className="table table-striped my-4">
-                <thead>
+        <div
+          className={`spinner-border text-primary center position-absolute ${
+            loading ? 'visible' : 'invisible'
+          }`}
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <div
+          className={`table-responsive-sm ${loading ? 'invisible' : 'visible'}`}
+        >
+          <table className="table table-striped my-4">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Standard</th>
+                <th scope="col">Registered</th>
+                <th scope="col">Last Logged In</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map(function (student, i) {
+                return (
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Standard</th>
-                    <th scope="col">Registered</th>
-                    <th scope="col">Last Logged In</th>
+                    <td>{i + 1}</td>
+                    <td>{student.Full_name}</td>
+                    <td>{student.Email}</td>
+                    <td>{student.Standard}</td>
+                    <td>
+                      {new Date(
+                        Date.parse(student.Created_at)
+                      ).toLocaleString()}
+                    </td>
+                    <td>
+                      {new Date(
+                        Date.parse(student.Updated_at)
+                      ).toLocaleString()}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {students.map(function (student, i) {
-                    return (
-                      <tr>
-                        <td>{i + 1}</td>
-                        <td>{student.Full_name}</td>
-                        <td>{student.Email}</td>
-                        <td>{student.Standard}</td>
-                        <td>
-                          {new Date(
-                            Date.parse(student.Created_at)
-                          ).toLocaleString()}
-                        </td>
-                        <td>
-                          {new Date(
-                            Date.parse(student.Updated_at)
-                          ).toLocaleString()}
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-            <hr />
-          </>
-        )}
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+        <hr className={loading ? 'invisible' : 'visible'} />
       </Layout>
     )
   }

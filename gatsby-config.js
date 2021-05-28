@@ -3,7 +3,9 @@ module.exports = {
     siteUrl: `https://govirtuoso.org`,
   },
   plugins: [
-    `gatsby-plugin-preact`,
+    {
+      resolve: `gatsby-plugin-preact`,
+    },
     {
       resolve: `gatsby-plugin-sass`,
       options: {
@@ -16,11 +18,15 @@ module.exports = {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true,
-        purgeOnly: ['src/styles/global.scss'],
+        ignore: ['src/styles/meeting.scss'],
       },
     },
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-image`,
+    },
+    {
+      resolve: `gatsby-plugin-sharp`,
+    },
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {

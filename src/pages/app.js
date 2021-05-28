@@ -10,12 +10,6 @@ import Register from '../templates/register'
 
 export default class Index extends React.Component {
   render() {
-    if (typeof window !== 'undefined') {
-      if (!!!window.localStorage.getItem('new')) {
-        window.localStorage.setItem('new', false)
-        window.location.reload()
-      }
-    }
     return (
       <Router basepath="/app">
         <Dashboard path="/" />
