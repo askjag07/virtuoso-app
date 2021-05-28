@@ -308,7 +308,7 @@ export default class Home extends React.Component {
         </h2>
         <div className="row p-5 text-center">
           <div className="col">
-            <div className="card shadow border-0">
+            <div className="card shadow border-0 mb-4">
               <div className="card-body">
                 <h4 className="card-title pb-2">Problem Solving</h4>
                 <p className="card-text text-secondary">
@@ -319,18 +319,18 @@ export default class Home extends React.Component {
             </div>
           </div>
           <div className="col">
-            <div className="card shadow border-0">
+            <div className="card shadow border-0 mb-4">
               <div className="card-body">
                 <h4 className="card-title pb-2">Critical Thinking</h4>
                 <p className="card-text text-secondary">
                   Actively participate in classroom discussions to improve and
-                  fine-tune your understanding of programming.å
+                  fine-tune your understanding of programming.
                 </p>
               </div>
             </div>
           </div>
           <div className="col">
-            <div className="card shadow border-0">
+            <div className="card shadow border-0 mb-4">
               <div className="card-body">
                 <h4 className="card-title pb-2">Creativity</h4>
                 <p className="card-text text-secondary">

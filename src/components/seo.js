@@ -8,6 +8,16 @@ export default class Seo extends React.Component {
       <>
         <Helmet title={`${title} | Virtuoso`} defer={false} />
         <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta
+            name="keywords"
+            content="Programming Camp, Coding Camp, JavaScript Classes, Software Training, JavaScript Training, Software Camp, JavaScript Camp, Software Classes"
+          />
+          <meta name="author" content="Akshaj Jagarapu" />
+          <meta
+            name="description"
+            content="Learn the fundamentals of Artificial Intelligence (AI) with the most active language on the internet, JavaScript. With hands-on lectures and labs, build AI-powered web applications available to the public. Reach the heights of programming within a week under the guidance of a full-stack developer."
+          />
           <script type="application/ld+json">
             {`
                 {

@@ -9,10 +9,6 @@ footer {
 .video-container {
   width: 100%;
   height: 100%;
-  display: flex;
-}
-.video-container .OT_subscriber {
-  margin: 0.5rem;
 }
 
 .video-container.small {
@@ -28,11 +24,7 @@ footer {
 .video-container.left {
   top: 48px;
   bottom: 48px;
-  left: 0;
   max-height: 100vh;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  overflow: scroll;
   width: 172px;
   z-index: 100;
 }
@@ -65,10 +57,21 @@ footer {
 .video-container.active-19,
 .video-container.active-20,
 .video-container.active-21,
-.video-container.active-6,
-.video-container.active-6,
-.video-container.active-6,
-.video-container.active-6 {
+.video-container.active-22,
+.video-container.active-23,
+.video-container.active-24,
+.video-container.active-25,
+.video-container.active-26,
+.video-container.active-27,
+.video-container.active-28,
+.video-container.active-29,
+.video-container.active-30,
+.video-container.active-31,
+.video-container.active-32,
+.video-container.active-33,
+.video-container.active-34,
+.video-container.active-35,
+.video-container.active-36 {
   flex-wrap: wrap;
 }
 
@@ -80,22 +83,22 @@ footer {
 
 .video-container.active-5 .OT_subscriber,
 .video-container.active-6 .OT_subscriber {
-  width: 33% !important;
+  width: calc(100% / 3) !important;
   height: 50% !important;
 }
 
 .video-container.active-7 .OT_subscriber,
 .video-container.active-8 .OT_subscriber,
 .video-container.active-9 .OT_subscriber {
-  width: 33% !important;
-  height: 33% !important;
+  width: calc(100% / 3) !important;
+  height: calc(100% / 3) !important;
 }
 
 .video-container.active-10 .OT_subscriber,
 .video-container.active-11 .OT_subscriber,
 .video-container.active-12 .OT_subscriber {
   width: 25% !important;
-  height: 33% !important;
+  height: calc(100% / 3) !important;
 }
 
 .video-container.active-13 .OT_subscriber,
@@ -128,7 +131,7 @@ footer {
 .video-container.active-28 .OT_subscriber,
 .video-container.active-29 .OT_subscriber,
 .video-container.active-30 .OT_subscriber {
-  width: 16% !important;
+  width: calc(100% / 6) !important;
   height: 20% !important;
 }
 
@@ -138,6 +141,6 @@ footer {
 .video-container.active-34 .OT_subscriber,
 .video-container.active-35 .OT_subscriber,
 .video-container.active-36 .OT_subscriber {
-  width: 16% !important;
-  height: 16% !important;
+  width: calc(100% / 6) !important;
+  height: calc(100% / 6) !important;
 }

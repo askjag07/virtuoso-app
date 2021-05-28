@@ -248,25 +248,25 @@ export default class Meet extends React.Component {
     return (
       <div className="position-fixed bottom-0 left-0 start-0 end-0">
         <Seo title="Meeting" />
+        {!connected && (
+          <div
+            className="spinner-border text-primary center position-fixed"
+            role="status"
+          >
+            <span className="visually-hidden">Connecting...</span>
+          </div>
+        )}
         <div
-          className={`spinner-border text-primary center position-fixed ${
-            connected ? 'visible' : 'invisible'
-          }`}
-          role="status"
-        >
-          <span className="visually-hidden">Connecting...</span>
-        </div>
-        <div
-          className={`App-video-container justify-content-center align-items-center bg-black vw-100 vh-100 d-flex ${
-            active ? 'visible' : 'invisible'
+          className={`App-video-container d-flex position-relative justify-content-center align-items-center bg-black vw-100 vh-100 d-flex ${
+            active ? '' : 'd-none'
           }`}
         >
           <div
             id="cameraPublisherContainer"
-            className={`video-container ${
+            className={`video-container d-flex ${
               !!(meta ? meta.subscriber.camera : 0) ||
               (meta ? meta.subscriber.screen : false)
-                ? 'small bg-dark position-fixed top-0 end-0 shadow-lg rounded-bottom'
+                ? 'small bg-dark position-absolute top-0 end-0 shadow-lg rounded-bottom'
                 : ''
             }`}
           >
@@ -293,25 +293,25 @@ export default class Meet extends React.Component {
               </small>
             </button>
           </div>
-          <div id="screenPublisherContainer" className="invisible" />
+          <div id="screenPublisherContainer" className="d-none" />
           <div
             id="cameraSubscriberContainer"
             className={`video-container d-flex justify-content-center align-items-center ${
               (meta ? meta.subscriber.screen : false)
-                ? 'left'
+                ? 'left flex-column flex-nowrap overflow-scroll start-0'
                 : `active-${meta ? meta.subscriber.camera : 0} `
-            } ${(meta ? meta.subscriber.camera : 0) ? 'visible' : 'invisible'}`}
+            } ${(meta ? meta.subscriber.camera : 0) ? 'd-flex' : 'd-none'}`}
           />
           <div
             id="screenSubscriberContainer"
-            className={`video-container ${
-              !(meta ? meta.subscriber.screen : false) ? 'invisible' : 'visible'
+            className={`video-container d-flex justify-content-center align-items-center ${
+              !(meta ? meta.subscriber.screen : false) ? 'd-none' : ''
             }`}
           ></div>
         </div>
         <footer
-          className={`position-fixed bottom-0 mb-3 justify-content-center align-items-center w-100 d-flex ${
-            active ? 'visible' : 'invisible'
+          className={`position-absolute bottom-0 mb-3 justify-content-center align-items-center w-100 ${
+            active ? 'd-flex' : 'd-none'
           }`}
         >
           <div id="controls" className="bg-dark rounded shadow-lg p-2">
@@ -378,9 +378,7 @@ export default class Meet extends React.Component {
               )}
             </button>
             <button
-              className={`btn text-white mb-1 ${
-                profile.Admin ? 'visible' : 'invisible'
-              }`}
+              className={`btn text-white mb-1 ${profile.Admin ? '' : 'd-none'}`}
               id="startScreenSharing"
               type="button"
             >
@@ -398,7 +396,7 @@ export default class Meet extends React.Component {
             <div className="btn-group dropup">
               <button
                 className={`btn text-white mb-1 ${
-                  profile.Admin ? 'visible' : 'invisible'
+                  profile.Admin ? '' : 'd-none'
                 }`}
                 data-bs-toggle="dropdown"
                 data-bs-offset="0,10"

@@ -1,12 +1,6 @@
 import React from 'react'
 
-export const onRenderBody = function ({
-  setHtmlAttributes,
-  setPostBodyComponents,
-}) {
-  setHtmlAttributes({
-    lang: 'en',
-  })
+export const onRenderBody = function ({ setPostBodyComponents }) {
   setPostBodyComponents([
     <script
       key="https://static.opentok.com/v2/js/opentok.min.js"
