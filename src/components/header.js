@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
+import 'bootstrap/js/dist/collapse'
 
 export default class Header extends React.Component {
   render() {
@@ -27,7 +28,10 @@ export default class Header extends React.Component {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="collapsableContent">
+            <div
+              className="collapse navbar-collapse"
+              id="homeCollapsableContent"
+            >
               <ul className="navbar-nav me-auto mb-2 mb-sm-0">
                 <li className="nav-item me-2">
                   <Link className="nav-link" to="/">

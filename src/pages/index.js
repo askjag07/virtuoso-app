@@ -14,7 +14,9 @@ export default class Home extends React.Component {
             <h1 className="display-5 fw-bold">
               Learn AI with JavaScript
               <br />
-              <span className="text-muted">Coding for Classes 8 - 10</span>
+              <span className="text-muted">
+                Coding for Classes <br className="d-sm-none" /> 8 - 10
+              </span>
             </h1>
             <p className="my-5">
               Learn the fundamentals of Artificial Intelligence (AI) with the
@@ -26,7 +28,7 @@ export default class Home extends React.Component {
             <a
               target="_blank"
               href="/resume.pdf"
-              className="btn btn-primary me-3 shadow-sm align-middle"
+              className="btn btn-primary me-3 mb-3 shadow-sm align-middle"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,7 @@ export default class Home extends React.Component {
             <a
               target="_blank"
               href="/syllabus.pdf"
-              className="btn btn-primary me-3 shadow-sm align-middle"
+              className="btn btn-primary me-3 mb-3 shadow-sm align-middle"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -330,7 +332,7 @@ export default class Home extends React.Component {
             </div>
           </div>
           <div className="col">
-            <div className="card shadow border-0 mb-4">
+            <div className="card shadow border-0">
               <div className="card-body">
                 <h4 className="card-title pb-2">Creativity</h4>
                 <p className="card-text text-secondary">
