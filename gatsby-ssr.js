@@ -6,7 +6,6 @@ export const onRenderBody = function ({
 }) {
   setHtmlAttributes({
     lang: 'en',
-    class: 'user-select-none',
   })
   setPostBodyComponents([
     <script
