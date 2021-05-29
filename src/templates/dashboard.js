@@ -133,24 +133,6 @@ export default class Dashboard extends React.Component {
           })}
         </div>
         <hr />
-        {profile.Admin && (
-          <Link
-            className="sessions card bg-light shadow-sm border-0 p-4 mx-3 mb-4"
-            to="/app/meet/"
-            state={{ session: 0 }}
-          >
-            <div>
-              <h5>Join Test Meeting</h5>
-            </div>
-            <p className="m-0">
-              <small>
-                Date: N/A
-                <br />
-                Time: N/A
-              </small>
-            </p>
-          </Link>
-        )}
       </Layout>
     )
   }

@@ -75,6 +75,11 @@ export default class Meet extends React.Component {
             insertMode: 'append',
             width: '100%',
             height: '100%',
+            preferredFrameRate: 15,
+            preferredResolution: {
+              width: 720,
+              height: 480,
+            },
             showControls: true,
             style: {
               buttonDisplayMode: 'off',
@@ -98,6 +103,15 @@ export default class Meet extends React.Component {
       otSDK
         .publish('cameraPublisherContainer', {
           insertMode: 'append',
+          audioBitrate: 12000,
+          audioFallbackEnabled: false,
+          autoGainControl: false,
+          resolution: {
+            width: 720,
+            height: 480,
+          },
+          frameRate: 15,
+          videoContentHint: 'detail',
           width: '100%',
           height: '100%',
           showControls: true,
