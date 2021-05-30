@@ -8,7 +8,8 @@
     "start": "npm run reset && npm run format && gatsby build && cp -R public govirtuoso.org && gatsby serve",
     "test": "npm run reset && npm run format && gatsby develop",
     "reset": "gatsby clean && rm -rf govirtuoso.org",
-    "format": "prettier --write \"**/*.{js,jsx,scss,json}\""
+    "format": "prettier --write \"**/*.{js,jsx,scss,json}\"",
+    "lighthouse": "lighthouse https://govirtuoso.org/ --view --output-path=./lighthouse/results__v2.1.7.html"
   },
   "dependencies": {
     "@reach/router": "^1.3.4",
