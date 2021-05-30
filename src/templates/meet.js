@@ -399,7 +399,7 @@ export default class Meet extends React.Component {
               )}
             </button>
             <button
-              className={`btn text-white mb-1 ${profile.Admin ? '' : 'd-none'}`}
+              className={`btn text-white mb-1 ${admin ? '' : 'd-none'}`}
               id="startScreenSharing"
               type="button"
             >

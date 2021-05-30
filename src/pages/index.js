@@ -317,8 +317,8 @@ export default class Home extends React.Component {
               <div className="card-body">
                 <h4 className="card-title pb-2">Problem Solving</h4>
                 <p className="card-text text-secondary">
-                  Solve a wide variety of challenges and puzzles both inside and
-                  outside of sessions to stay sharp.
+                  Solve a wide variety of challenges and puzzles inside and
+                  outside of sessions to improve your reasoning skills.
                 </p>
               </div>
             </div>
@@ -329,7 +329,7 @@ export default class Home extends React.Component {
                 <h4 className="card-title pb-2">Critical Thinking</h4>
                 <p className="card-text text-secondary">
                   Actively participate in classroom discussions to improve and
-                  fine-tune your understanding of programming.
+                  boost your understanding of programming.
                 </p>
               </div>
             </div>
@@ -339,8 +339,8 @@ export default class Home extends React.Component {
               <div className="card-body">
                 <h4 className="card-title pb-2">Creativity</h4>
                 <p className="card-text text-secondary">
-                  Complete open-ended projects with minimal guidelines to
-                  cultivate your right side of your brain.
+                  Complete open-ended projects with minimum guidelines to
+                  cultivate your own, unique style of thinking.
                 </p>
               </div>
             </div>

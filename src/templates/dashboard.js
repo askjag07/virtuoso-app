@@ -11,53 +11,53 @@ let sessions = []
 const sessions0 = [
   {
     index: 1,
-    date: new Date(2021, 5, 1, 10, 30),
+    date: new Date(2021, 5, 1, 14, 0),
   },
   {
     index: 2,
-    date: new Date(2021, 5, 2, 10, 30),
+    date: new Date(2021, 5, 2, 14, 0),
   },
   {
     index: 3,
-    date: new Date(2021, 5, 3, 10, 30),
+    date: new Date(2021, 5, 3, 14, 0),
   },
   {
     index: 4,
-    date: new Date(2021, 5, 4, 10, 30),
+    date: new Date(2021, 5, 4, 14, 0),
   },
   {
     index: 5,
-    date: new Date(2021, 5, 5, 10, 30),
+    date: new Date(2021, 5, 5, 14, 0),
   },
   {
     index: 6,
-    date: new Date(2021, 5, 6, 10, 30),
+    date: new Date(2021, 5, 6, 14, 0),
   },
 ]
 const sessions1 = [
   {
     index: 1,
-    date: new Date(2021, 5, 15, 10, 30),
+    date: new Date(2021, 5, 15, 14, 0),
   },
   {
     index: 2,
-    date: new Date(2021, 5, 16, 10, 30),
+    date: new Date(2021, 5, 16, 14, 0),
   },
   {
     index: 3,
-    date: new Date(2021, 5, 17, 10, 30),
+    date: new Date(2021, 5, 17, 14, 0),
   },
   {
     index: 4,
-    date: new Date(2021, 5, 18, 10, 30),
+    date: new Date(2021, 5, 18, 14, 0),
   },
   {
     index: 5,
-    date: new Date(2021, 5, 19, 10, 30),
+    date: new Date(2021, 5, 19, 14, 0),
   },
   {
     index: 6,
-    date: new Date(2021, 5, 20, 10, 30),
+    date: new Date(2021, 5, 20, 14, 0),
   },
 ]
 export default class Dashboard extends React.Component {
@@ -120,12 +120,13 @@ export default class Dashboard extends React.Component {
                     Date: &nbsp;{session.date.toDateString().slice(0, -5)}
                     <br />
                     Time: &nbsp;
-                    {session.date.toLocaleString().slice(10, -6) +
-                      ' AM - ' +
-                      new Date(session.date.getTime() + 5400000)
-                        .toLocaleString()
-                        .slice(10, -6) +
-                      ' PM'}
+                    {`${session.date
+                      .toLocaleTimeString()
+                      .slice(0, -6)} PM - ${new Date(
+                      session.date.getTime() + 5400000
+                    )
+                      .toLocaleTimeString()
+                      .slice(0, -6)} PM`}
                   </small>
                 </p>
               </Link>

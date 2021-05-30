@@ -13,12 +13,11 @@ const resources = [
   },
   {
     name: 'session2.zip',
-    description:
-      'Learn about the variables and logical operations with a test.',
+    description: 'Learn about variables and logical operators with a test.',
   },
   {
     name: 'session3.zip',
-    description: 'Master JavaScript basics and create a calculator program.',
+    description: 'Master advanced logic and create a calculator program.',
   },
 ]
 

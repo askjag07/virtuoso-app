@@ -3,10 +3,9 @@ import { Helmet } from 'react-helmet'
 
 export default class Seo extends React.Component {
   render() {
-    const { title } = this.props
     return (
       <>
-        <Helmet title={`${title} | Virtuoso`} defer={false} />
+        <Helmet title={`${this.props.title} | Virtuoso`} defer={false} />
         <Helmet>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta
@@ -21,14 +20,20 @@ export default class Seo extends React.Component {
           <script type="application/ld+json">
             {`
                 {
-                    "@context": "https://govirtuoso.org",
-                    "@type": "Virtuoso",
-                    "url": "https://govirtuoso.org",
+                    "@context": "https://schema.org",
+                    "@type": "Organization",
+                    "@id": "https://govirtuoso.org",
                     "name": "Virtuoso",
-                    "contactPoint": {
-                        "@type": "ContactPoint",
-                        "telephone": "+91-86882-33655",
-                        "contactType": "Customer Support"
+                    "url": "https://govirtuoso.org",
+                    "logo": "https://govirtuoso.org/logo.png",
+                    "telephone": "+918688233655",
+                    "speakable": {
+                      "@type": "SpeakableSpecification",
+                      "xpath": [
+                          "/html/head/title",
+                          "/html/head/meta[@name='description']/@content"
+                        ]
+                      }
                     }
                 }
             `}

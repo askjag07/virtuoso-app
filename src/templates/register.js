@@ -124,12 +124,13 @@ export default class Register extends React.Component {
           }`}
           onSubmit={this.handleSubmit}
         >
-          <StaticImage
-            className="icon mx-auto mt-1"
-            src="../images/icon.png"
-            placeholder="tracedSVG"
-            alt="Virtuoso"
-          />
+          <Link to="/" className="icon mx-auto mt-1">
+            <StaticImage
+              src="../images/icon.png"
+              placeholder="tracedSVG"
+              alt="Virtuoso"
+            />
+          </Link>
           <h1 className="text-center display-6 my-4">Register</h1>
           <div className="form-floating mb-3">
             <input
