@@ -15,7 +15,7 @@ export default class Home extends React.Component {
               Learn AI with JavaScript
               <br />
               <span className="text-muted">
-                Coding for Classes <br className="d-sm-none" /> 8 - 10
+                Coding for Classes <br className="d-sm-none" /> 9 - 12
               </span>
             </h1>
             <p className="my-5">
@@ -25,10 +25,16 @@ export default class Home extends React.Component {
               the public. Reach the heights of programming within a week under
               the guidance of a full-stack developer.
             </p>
+            <Link
+              to="/app/login"
+              className="btn btn-primary me-3 shadow-sm mb-3"
+            >
+              Log In
+            </Link>
             <a
               target="_blank"
               href="/resume.pdf"
-              className="btn btn-primary me-3 mb-3 shadow-sm align-middle"
+              className="btn btn-outline-primary me-3 mb-3 shadow-sm align-middle"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +51,7 @@ export default class Home extends React.Component {
             <a
               target="_blank"
               href="/syllabus.pdf"
-              className="btn btn-primary me-3 mb-3 shadow-sm align-middle"
+              className="btn btn-outline-primary mb-3 shadow-sm align-middle"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,12 +65,6 @@ export default class Home extends React.Component {
               </svg>
               &nbsp; Syllabus
             </a>
-            <Link
-              to="/app/login"
-              className="btn btn-outline-primary shadow-sm mb-3"
-            >
-              Log In
-            </Link>
           </div>
         </div>
         <div className="row text-md-center justify-content-between align-items-center pt-5">

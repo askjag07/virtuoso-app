@@ -11,32 +11,6 @@ let sessions = []
 const sessions0 = [
   {
     index: 1,
-    date: new Date(2021, 5, 1, 14, 0),
-  },
-  {
-    index: 2,
-    date: new Date(2021, 5, 2, 14, 0),
-  },
-  {
-    index: 3,
-    date: new Date(2021, 5, 3, 14, 0),
-  },
-  {
-    index: 4,
-    date: new Date(2021, 5, 4, 14, 0),
-  },
-  {
-    index: 5,
-    date: new Date(2021, 5, 5, 14, 0),
-  },
-  {
-    index: 6,
-    date: new Date(2021, 5, 6, 14, 0),
-  },
-]
-const sessions1 = [
-  {
-    index: 1,
     date: new Date(2021, 5, 15, 14, 0),
   },
   {
@@ -79,9 +53,6 @@ export default class Dashboard extends React.Component {
         default:
           sessions = sessions0
           break
-        case 1:
-          sessions = sessions1
-          break
       }
       sessions.map(function (session, index) {
         sessions[index].nyet =
@@ -94,7 +65,7 @@ export default class Dashboard extends React.Component {
   render() {
     const { profile } = this.state
     return (
-      <Layout>
+      <Layout link="Home">
         <Seo title="Dashboard" />
         <h1 className="py-3 mt-5">Hello {profile.Full_name}!</h1>
         <hr />
@@ -117,16 +88,17 @@ export default class Dashboard extends React.Component {
                 </div>
                 <p className={`m-0 ${session.nyet ? ' text-dark' : ''}`}>
                   <small>
-                    Date: &nbsp;{session.date.toDateString().slice(0, -5)}
+                    Date: &nbsp;Coming Soon...
+                    {/*session.date.toDateString().slice(0, -5)*/}
                     <br />
-                    Time: &nbsp;
-                    {`${session.date
+                    Time: &nbsp;Coming Soon...
+                    {/*`${/*session.date
                       .toLocaleTimeString()
                       .slice(0, -6)} PM - ${new Date(
                       session.date.getTime() + 5400000
                     )
                       .toLocaleTimeString()
-                      .slice(0, -6)} PM`}
+                      .slice(0, -6)} PM`*/}
                   </small>
                 </p>
               </Link>

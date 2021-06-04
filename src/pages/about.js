@@ -8,20 +8,22 @@ export default class About extends React.Component {
   tools = [
     {
       name: 'Gatsby',
-      description: 'A blazing-fast static site generator built on React.',
+      description:
+        'A blazing-fast static site generator built on the popular library, React.',
       link: 'https://www.gatsbyjs.com/docs/tutorial/part-0/',
       type: 'React Framework',
     },
     {
       name: 'React',
-      description: 'The most popular JavaScript library for building websites.',
+      description:
+        'The most popular and efficient JavaScript library for building websites.',
       link: 'https://reactjs.org/tutorial/tutorial.html',
       type: 'JavaScript Library',
     },
     {
       name: 'Bootstrap',
       description:
-        "The world's most popular atomic css library for responsive websites.",
+        'The most popular atomic css library for building responsive websites.',
       link: 'https://getbootstrap.com/docs/5.0/getting-started/introduction/',
       type: 'Style Library',
     },
@@ -42,13 +44,14 @@ export default class About extends React.Component {
     {
       name: 'Opentok',
       description:
-        'A JavaScript library for building robust meeting applications.',
+        'A JavaScript library for building robust, scaleable meeting applications.',
       link: 'https://tokbox.com/developer/tutorials/web/basic-video-chat/',
       type: 'WebRTC Library',
     },
     {
       name: 'Golang',
-      description: 'The most efficient programming language in the world.',
+      description:
+        'The most efficient programming language in the world, built by google.',
       link: 'https://tour.golang.org/welcome/1',
       type: 'Programming Language',
     },
@@ -76,7 +79,7 @@ export default class About extends React.Component {
     {
       name: 'Debian',
       description:
-        'Light, free, and universal operating system built on Linux.',
+        'Light, free, and universal operating system built on Linux for enterprise.',
       link: 'https://www.debian.org/doc/manuals/debian-reference/ch01.en.html',
       type: 'Operating System',
     },

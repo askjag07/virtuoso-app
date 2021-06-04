@@ -6,78 +6,28 @@ import 'bootstrap/js/dist/collapse'
 let profile = {}
 
 export default class Layout extends React.Component {
+  _isMounted = false
   constructor(props) {
     super(props)
-    this.getLinks = this.getLinks.bind(this)
+    this.logout = this.logout.bind(this)
   }
   componentDidMount() {
+    this._isMounted = true
     profile = JSON.parse(window.sessionStorage.getItem('profile'))
   }
   logout() {
-    window.sessionStorage.clear()
-    navigate('/app/login/', {
-      replace: true,
-    })
-  }
-  getLinks() {
-    let jsx
-    switch (this.props.link) {
-      default:
-        jsx = (
-          <ul className="navbar-nav me-auto mb-2 mb-sm-0">
-            {profile.Admin && (
-              <li className="nav-item me-2">
-                <Link className="nav-link" to="/app/students/">
-                  Students
-                </Link>
-              </li>
-            )}
-            <li className="nav-item">
-              <Link className="nav-link" to="/app/resources/">
-                Resources
-              </Link>
-            </li>
-          </ul>
-        )
-        break
-      case 'Resources':
-        jsx = (
-          <ul className="navbar-nav me-auto mb-2 mb-sm-0">
-            <li className="nav-item me-2">
-              <Link className="nav-link" to="/app/">
-                Home
-              </Link>
-            </li>
-            {profile.Admin && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/app/students/">
-                  Students
-                </Link>
-              </li>
-            )}
-          </ul>
-        )
-        break
-      case 'Students':
-        jsx = (
-          <ul className="navbar-nav me-auto mb-2 mb-sm-0">
-            <li className="nav-item me-2">
-              <Link className="nav-link" to="/app/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/app/resources/">
-                Resources
-              </Link>
-            </li>
-          </ul>
-        )
-        break
+    if (this._isMounted) {
+      window.sessionStorage.clear()
+      navigate('/app/login/', {
+        replace: true,
+      })
     }
-    return jsx
+  }
+  componentWillUnmount() {
+    this._isMounted = false
   }
   render() {
+    const { link } = this.props
     return (
       <>
         <nav className="navbar navbar-expand-sm navbar-light shadow-sm">
@@ -103,7 +53,20 @@ export default class Layout extends React.Component {
             </button>
             <div className="collapse navbar-collapse" id="collapsableContent">
               <ul className="navbar-nav me-auto mb-2 mb-sm-0">
-                {this.getLinks()}
+                {link !== 'Home' && (
+                  <li className="nav-item me-2">
+                    <Link className="nav-link" to="/app/">
+                      Home
+                    </Link>
+                  </li>
+                )}
+                {profile.Admin && link !== 'Students' && (
+                  <li className="nav-item me-2">
+                    <Link className="nav-link" to="/app/students/">
+                      Students
+                    </Link>
+                  </li>
+                )}
               </ul>
               <button
                 className="btn btn-sm btn-outline-secondary"

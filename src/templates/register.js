@@ -195,6 +195,7 @@ export default class Register extends React.Component {
               <option value="8">8</option>
               <option value="9">9</option>
               <option value="10">10</option>
+              <option value="13">none</option>
             </select>
           </div>
           <div className="d-grid">

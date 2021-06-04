@@ -25,6 +25,7 @@ export default class Meet extends React.Component {
     localAudioEnabled: true,
     localVideoEnabled: true,
     admin: true,
+    kick: null,
   }
   constructor(props) {
     super(props)
@@ -35,6 +36,7 @@ export default class Meet extends React.Component {
     this.toggleLocalVideo = this.toggleLocalVideo.bind(this)
     this.toggleAudio = this.toggleAudio.bind(this)
     this.kickOut = this.kickOut.bind(this)
+    this.handleEvent = this.handleEvent.bind(this)
   }
 
   componentDidMount() {
@@ -76,10 +78,7 @@ export default class Meet extends React.Component {
             width: '100%',
             height: '100%',
             preferredFrameRate: 15,
-            preferredResolution: {
-              width: 720,
-              height: 480,
-            },
+            preferredResolution: '640x480',
             showControls: true,
             style: {
               buttonDisplayMode: 'off',
@@ -106,10 +105,7 @@ export default class Meet extends React.Component {
           audioBitrate: 12000,
           audioFallbackEnabled: false,
           autoGainControl: false,
-          resolution: {
-            width: 720,
-            height: 480,
-          },
+          resolution: '640x480',
           frameRate: 15,
           videoContentHint: 'detail',
           width: '100%',
@@ -223,30 +219,38 @@ export default class Meet extends React.Component {
       })
     }
   }
-
+  handleEvent(e) {
+    if (this._isMounted) {
+      const { subscribers, kick } = this.state
+      if (kick) {
+        otSDK.signal(
+          'mod',
+          'bye',
+          subscribers.camera[e.target.parentElement.parentElement.id].stream
+            .connection,
+          function (error) {
+            if (error) {
+              console.error(`SIGERR (${error.name}):\n\n${error.message}`)
+            } else {
+              console.log('Signal sent.')
+            }
+          }
+        )
+        this.setState({ kick: false })
+      }
+    }
+  }
   kickOut() {
     if (this._isMounted) {
-      const { subscribers } = this.state
-      document.querySelectorAll('.OT_subscriber').forEach(function (item) {
-        item.addEventListener('dblclick', function (e) {
-          otSDK.signal(
-            'mod',
-            'bye',
-            subscribers.camera[e.target.parentElement.parentElement.id].stream
-              .connection,
-            function (error) {
-              if (error) {
-                console.error(`SIGERR (${error.name}):\n\n${error.message}`)
-              } else {
-                console.log('Signal sent.')
-              }
-            }
+      const { kick } = this.state
+      if (kick === null) {
+        document
+          .querySelectorAll('.OT_subscriber')
+          .forEach(item =>
+            item.addEventListener('dblclick', e => this.handleEvent(e), true)
           )
-          item.removeEventListener('dblclick', function () {
-            console.log('Kicked.')
-          })
-        })
-      })
+      }
+      this.setState({ kick: true })
     }
   }
   componentWillUnmount() {
@@ -465,6 +469,18 @@ export default class Meet extends React.Component {
                 />
               </svg>
             </button>
+            <a className="btn mb-1 text-white ms-2" href="./c1.zip" download>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M5.5 9.438V8.5h1v.938a1 1 0 0 0 .03.243l.4 1.598-.93.62-.93-.62.4-1.598a1 1 0 0 0 .03-.243z" />
+                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-4-.5V2h-1V1H6v1h1v1H6v1h1v1H6v1h1v1H5.5V6h-1V5h1V4h-1V3h1zm0 4.5h1a1 1 0 0 1 1 1v.938l.4 1.599a1 1 0 0 1-.416 1.074l-.93.62a1 1 0 0 1-1.109 0l-.93-.62a1 1 0 0 1-.415-1.074l.4-1.599V8.5a1 1 0 0 1 1-1z" />
+              </svg>
+            </a>
           </div>
         </footer>
       </div>
