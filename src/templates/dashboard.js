@@ -2,36 +2,34 @@ import React from 'react'
 import { Link, navigate } from 'gatsby'
 
 import Seo from '../components/seo'
-
 import Layout from '../components/layout'
 
 import { getAuthenticated } from '../services/auth'
 
-let sessions = []
-const sessions0 = [
+let sessions = [
   {
     index: 1,
-    date: new Date(2021, 5, 15, 14, 0),
+    date: new Date(2021, 5, 15, 17, 30),
   },
   {
     index: 2,
-    date: new Date(2021, 5, 16, 14, 0),
+    date: new Date(2021, 5, 16, 17, 30),
   },
   {
     index: 3,
-    date: new Date(2021, 5, 17, 14, 0),
+    date: new Date(2021, 5, 17, 17, 30),
   },
   {
     index: 4,
-    date: new Date(2021, 5, 18, 14, 0),
+    date: new Date(2021, 5, 18, 17, 30),
   },
   {
     index: 5,
-    date: new Date(2021, 5, 19, 14, 0),
+    date: new Date(2021, 5, 19, 17, 30),
   },
   {
     index: 6,
-    date: new Date(2021, 5, 20, 14, 0),
+    date: new Date(2021, 5, 20, 17, 30),
   },
 ]
 export default class Dashboard extends React.Component {
@@ -45,15 +43,9 @@ export default class Dashboard extends React.Component {
         replace: true,
       })
     } else {
-      const p = JSON.parse(window.sessionStorage.getItem('profile'))
       this.setState({
-        profile: p,
+        profile: JSON.parse(window.sessionStorage.getItem('profile')),
       })
-      switch (p.Session) {
-        default:
-          sessions = sessions0
-          break
-      }
       sessions.map(function (session, index) {
         sessions[index].nyet =
           session.date.getTime() - 300000 > new Date().getTime() ||
@@ -88,17 +80,16 @@ export default class Dashboard extends React.Component {
                 </div>
                 <p className={`m-0 ${session.nyet ? ' text-dark' : ''}`}>
                   <small>
-                    Date: &nbsp;Coming Soon...
-                    {/*session.date.toDateString().slice(0, -5)*/}
+                    Date: &nbsp; {session.date.toDateString().slice(0, -5)}
                     <br />
-                    Time: &nbsp;Coming Soon...
-                    {/*`${/*session.date
+                    Time: &nbsp;{' '}
+                    {`${session.date
                       .toLocaleTimeString()
                       .slice(0, -6)} PM - ${new Date(
                       session.date.getTime() + 5400000
                     )
                       .toLocaleTimeString()
-                      .slice(0, -6)} PM`*/}
+                      .slice(0, -6)} PM`}
                   </small>
                 </p>
               </Link>
@@ -106,6 +97,7 @@ export default class Dashboard extends React.Component {
           })}
         </div>
         <hr />
+        <Link to="/app/meet/" state={{ session: 0 }} />
       </Layout>
     )
   }
