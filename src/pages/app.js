@@ -1,11 +1,11 @@
 import React from 'react'
 import { Router, Redirect } from '@reach/router'
 
-import Dashboard from '../templates/dashboard'
-import Students from '../templates/students'
-import Meet from '../templates/meet'
-import Login from '../templates/login'
-import Register from '../templates/register'
+import Dashboard from '../routes/dashboard'
+import Students from '../routes/students'
+import Meet from '../routes/meet'
+import Login from '../routes/login'
+import Register from '../routes/register'
 
 export default class Index extends React.Component {
   render() {

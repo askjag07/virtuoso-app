@@ -5,7 +5,7 @@
   "private": true,
   "license": "UNLICENSED",
   "description": "Free JavaScript classes full of critical thinking activities, enriching code labs, inspiring projects, and more. Learn quintessential skills required for competing in this age of technology.",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "scripts": {
     "start": "npm run reset && npm run format && gatsby build && cp -R public govirtuoso.org && gatsby serve",
     "test": "npm run reset && npm run format && gatsby develop",
