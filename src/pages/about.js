@@ -49,7 +49,7 @@ export default class About extends React.Component {
       type: 'WebRTC Library',
     },
     {
-      name: 'Golang',
+      name: 'GoLang',
       description:
         'The most efficient programming language in the world, built by google.',
       link: 'https://tour.golang.org/welcome/1',

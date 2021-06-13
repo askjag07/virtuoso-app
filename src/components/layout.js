@@ -30,7 +30,11 @@ export default class Layout extends React.Component {
     const { link } = this.props
     return (
       <>
-        <nav className="navbar navbar-expand-sm navbar-light shadow-sm">
+        <nav
+          className={`navbar navbar-light shadow-sm ${
+            profile.Admin ? 'navbar-expand-sm' : ''
+          }`}
+        >
           <div className="container-md">
             <Link className="navbar-brand" to="/app/">
               <StaticImage
@@ -40,34 +44,41 @@ export default class Layout extends React.Component {
                 height={35}
               />
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapsableContent"
-              aria-controls="collapsableContent"
-              aria-expanded="false"
-              aria-label="Toggle Menu"
+            {profile.Admin && (
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsableContent"
+                aria-controls="collapsableContent"
+                aria-expanded="false"
+                aria-label="Toggle Menu"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+            )}
+            <div
+              className={profile.Admin ? 'collapse navbar-collapse' : ''}
+              id="collapsableContent"
             >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="collapsableContent">
-              <ul className="navbar-nav me-auto mb-2 mb-sm-0">
-                {link !== 'Home' && (
-                  <li className="nav-item me-2">
-                    <Link className="nav-link" to="/app/">
-                      Home
-                    </Link>
-                  </li>
-                )}
-                {profile.Admin && link !== 'Students' && (
-                  <li className="nav-item me-2">
-                    <Link className="nav-link" to="/app/students/">
-                      Students
-                    </Link>
-                  </li>
-                )}
-              </ul>
+              {profile.Admin && (
+                <ul className="navbar-nav me-auto mb-2 mb-sm-0">
+                  {link !== 'Home' && (
+                    <li className="nav-item me-2">
+                      <Link className="nav-link" to="/app/">
+                        Home
+                      </Link>
+                    </li>
+                  )}
+                  {link !== 'Students' && (
+                    <li className="nav-item me-2">
+                      <Link className="nav-link" to="/app/students/">
+                        Students
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              )}
               <button
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.logout}

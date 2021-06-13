@@ -1,0 +1,47 @@
+/*    ______   __                                                                 __       
+ *   /      \ /  |                                                               /  |      
+ *  /$$$$$$  |$$ |  ______    _______  _______  __   __   __   ______    ______  $$ |   __ 
+ *  $$ |  $$/ $$ | /      \  /       |/       |/  | /  | /  | /      \  /      \ $$ |  /  |
+ *  $$ |      $$ | $$$$$$  |/$$$$$$$//$$$$$$$/ $$ | $$ | $$ |/$$$$$$  |/$$$$$$  |$$ |_/$$/ 
+ *  $$ |   __ $$ | /    $$ |$$      \$$      \ $$ | $$ | $$ |$$ |  $$ |$$ |  $$/ $$   $$<  
+ *  $$ \__/  |$$ |/$$$$$$$ | $$$$$$  |$$$$$$  |$$ \_$$ \_$$ |$$ \__$$ |$$ |      $$$$$$  \ 
+ *  $$    $$/ $$ |$$    $$ |/     $$//     $$/ $$   $$   $$/ $$    $$/ $$ |      $$ | $$  |
+ *   $$$$$$/  $$/  $$$$$$$/ $$$$$$$/ $$$$$$$/   $$$$$/$$$$/   $$$$$$/  $$/       $$/   $$/ 
+ *  
+ *  GOALS
+ *  1. Change HELL0 W0RLD! into HELL0 VS C0DE! as fast as possible.
+ *  2. Type 3 more lines of HELL0 VS C0DE! using AI autocompletion.
+ *  
+ *  
+ *  
+ *  INSTRUCTIONS
+ *  Step 1: Press the [CTRL + F] keys to open the find command.
+ *  Step 2: Type W0RLD into the input box.
+ *  Step 3: Click on the dropdown to the left of the input box.
+ *  Step 4: Type VS C0DE into the new input box.
+ *  Step 5: Click enter until you have completed the first goal.
+ *
+ *  Step 6: Type H on line 46.
+ *  Step 7: Press the [TAB] key to autocomplete the line.
+ *  Step 8: Repeat for lines 47 and 48 to complete the second goal.
+ */
+
+
+
+HELLO VS CODE!
+HELLO WORLD!
+HELLO VS CODE!
+HELLO VS CODE!
+HELLO WORLD!
+HELLO WORLD!
+HELLO VS CODE!
+HELLO WORLD!
+HELLO VS CODE!
+HELLO WORLD!
+HELLO WORLD!
+HELLO WORLD!
+HELLO VS CODE!
+HELLO WORLD!
+HELLO WORLD!
+
+
