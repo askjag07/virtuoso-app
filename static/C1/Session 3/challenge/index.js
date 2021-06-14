@@ -12,6 +12,8 @@
  *                                                            $$    $$/
  *                                                             $$$$$$/
  *
+ *  Send your finished challenge to askjag07@gmail.com. The most creative projects will be showcased towards the end of the course.
+ *
  *  GOALS
  *  1. Send a prompt to get the user's name in the browser.
  *  2. Send a prompt to greet the user and ask how their day is.

@@ -12,6 +12,8 @@
  *                                                            $$    $$/
  *                                                             $$$$$$/
  *
+ *  Send your finished challenge to askjag07@gmail.com. The most creative projects will be showcased towards the end of the course.
+ *
  *  GOALS
  *  1. Improve the UI of the program from the classwork with your own creativity. Good luck!
  *

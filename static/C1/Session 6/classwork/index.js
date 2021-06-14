@@ -9,7 +9,7 @@
  *   $$$$$$/  $$/  $$$$$$$/ $$$$$$$/ $$$$$$$/   $$$$$/$$$$/   $$$$$$/  $$/       $$/   $$/
  *
  *  GOALS
- *  1. Create a chatbot with your own creativity. Good luck!
+ *  1. Create a program that draws a clown mask on the user's face.
  *
  *
  *
@@ -17,30 +17,26 @@
  *  Listen carefully in class.
  */
 
+var video
 var classifier
-var startBtn
-var stages = [
-  { yes: 'Hello! Was your day good?', no: 'Hello! Was your day good?' },
-  { yes: 'That is great to hear.', no: 'That is great to hear.' },
-]
-var stage = 0
+var noseX
+var noseY
+var eyelX
+var eyelY
+var eyerX
+var eyerY
 
 var setup = function () {
-  noCanvas()
-  startBtn = createButton('start')
-  startBtn.class('button is-primary')
-  startBtn.mousePressed(startConv)
-  classifier = ml5.soundClassifier('SpeechCommands18w', {
-    probabilityThreshold: 0.95,
-  })
+  createCanvas(320, 240)
+  video = createCapture(VIDEO)
+  video.size(320, 240)
+  video.hide()
+  video = ml5.flipImage(video)
+
+  classifier = ml5.poseNet(video)
+  classifier.on('pose', onPose)
 }
-var startConv = function () {
-  window.speechSynthesis.speak(new SpeechSynthesisUtterance('Hello!'))
-  classifier.classify(onResult)
+var draw = function () {
+  image(video, 0, 0)
 }
-var onResult = function (error, results) {
-  if (error) {
-    alert('Error: ' + error)
-  } else {
-  }
-}
+var onPose = function (poses) {}

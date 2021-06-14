@@ -12,8 +12,10 @@
  *                                                            $$    $$/
  *                                                             $$$$$$/
  *
+ *  Send your finished challenge to askjag07@gmail.com. The most creative projects will be showcased towards the end of the course.
+ *
  *  GOALS
- *  1. Improve the program from the classwork with your own creativity. Add a hat, teeth, horns, etc. Good luck!
+ *  1. Improve the chatbot from the classwork with your own creativity. Good luck!
  *
  *
  *
