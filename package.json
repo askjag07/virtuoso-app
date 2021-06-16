@@ -5,7 +5,7 @@
   "private": true,
   "license": "UNLICENSED",
   "description": "Free JavaScript classes full of critical thinking activities, enriching code labs, inspiring projects, and more. Learn quintessential skills required for competing in this age of technology.",
-  "version": "3.4.9",
+  "version": "3.4.10",
   "scripts": {
     "start": "npm run reset && npm run format && gatsby build && cp -R public govirtuoso.org && gatsby serve",
     "test": "npm run reset && npm run format && gatsby develop",
@@ -16,7 +16,7 @@
   "dependencies": {
     "@reach/router": "^1.3.4",
     "bootstrap": "^5.0.1",
-    "gatsby": "^3.7.1",
+    "gatsby": "^3.7.2",
     "gatsby-plugin-image": "^1.7.1",
     "gatsby-plugin-manifest": "^3.7.1",
     "gatsby-plugin-offline": "^4.7.1",
@@ -33,7 +33,7 @@
     "preact": "^10.5.13",
     "preact-render-to-string": "^5.1.19",
     "react-helmet": "^6.1.0",
-    "sass": "^1.34.1"
+    "sass": "^1.35.1"
   },
   "devDependencies": {
     "prettier": "^2.3.1"
