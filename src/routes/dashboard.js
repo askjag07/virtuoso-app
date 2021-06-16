@@ -48,7 +48,7 @@ export default class Dashboard extends React.Component {
       })
       sessions.map(function (session, index) {
         sessions[index].nyet =
-          session.date.getTime() - 300000 > new Date().getTime() ||
+          session.date.getTime() - 900000 > new Date().getTime() ||
           session.date.getTime() + 5400000 < new Date().getTime()
         return null
       })
