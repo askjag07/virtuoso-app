@@ -21,7 +21,7 @@ let sessions = [
   },
   {
     index: 4,
-    date: new Date(2021, 5, 18, 17, 30),
+    date: new Date(2021, 5, 18, 18, 30),
   },
   {
     index: 5,
